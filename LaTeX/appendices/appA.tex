@@ -1,0 +1,157 @@
+%==============================================================================
+% Appendix A: Notation and Conventions
+%==============================================================================
+\section{Notation and Conventions}
+\label{app:A}
+
+This appendix collects the notation conventions used in the body, the
+shorthand for the four geometries, the terminology of the two-layer
+structure, and the distinction between three 3-forms that are easily
+conflated.  Since the formulas in the body are written in compact form, the
+premises of the comparison are made explicit here.
+
+\subsection{Geometries and Common Setup}
+\label{app:A:geom}
+
+\begin{itemize}
+  \item $\Tthree$: flat three-torus.
+  \item $\Nilthree$: Heisenberg-type nil geometry.
+  \item $\Sthree$: round three-sphere.
+  \item $\Solthree$: solv geometry.
+\end{itemize}
+
+In this paper ``the four geometries'' always refer to these four.  All
+comparisons are carried out on the Euclidean product structure
+\begin{equation}
+  M^3 \times \Sone,
+\end{equation}
+with $L$ denoting the length of $\Sone$.  $r_0$ is the reference length
+characterising the homogeneous background, and $R$ is the geometric scale
+appearing in the structure constants of the three-dimensional spatial part.
+
+\subsection{Two-Layer Structure and Response Vocabulary}
+\label{app:A:layer}
+
+\begin{itemize}
+  \item \textbf{first layer}: response that can be defined on the bulk side
+        without introducing a boundary.
+  \item \textbf{second layer}: response defined in the
+        boundary / interface / cobordism setting.
+  \item \textbf{secondary reading}: an interpretive layer that re-reads, in
+        another language, the already-fixed Euclidean response dictionary.
+\end{itemize}
+
+In the body we further use the following terms.
+
+\begin{itemize}
+  \item \textbf{allowed}: the channel is geometrically meaningful.
+  \item \textbf{protected}: the channel is not automatically opened even
+        under non-trivial perturbations.
+  \item \textbf{activated}: a non-trivial response is raised by the
+        structure of the geometry.
+  \item \textbf{minimal}: there is no active family and the geometry sits
+        on the benchmark side.
+\end{itemize}
+
+\subsection{Principal Symbols and Representative Values}
+\label{app:A:symbols}
+
+\begin{itemize}
+  \item $\KMxw$: Maxwell baseline coefficient.
+  \item $\SCZ$: Callias--Zanelli inflow action.
+  \item $\etaAPS$: APS spectral invariant.
+  \item $\Ntop$: frame-bundle-normalised torsional-charge entry.
+  \item $C^2_\LC$: Levi--Civita Weyl scalar.
+  \item spin-2 rigidity tag: scaffold-layer label
+        (\texttt{trivial / non-rigid / rigid}).
+  \item $\AKK$: KK anisotropy marker.
+  \item AX torsion ansatz: $T_{ijk} = (2\eta/\rho)\,\epsilon_{ijk}$
+        (DPPU AX-mode convention from paper~III (EC) \S3; the coefficient
+        $2/\rho$ is fixed by this convention).
+\end{itemize}
+
+Representative benchmark values are listed below.  Derivation sketches and
+verification scripts are referenced in Appendix~\ref{app:E}.
+
+\begin{table}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lccl}
+\toprule
+Quantity & Value & Role & Derivation \\
+\midrule
+$\KMxw$ & $-L^2/(2 r_0^4)$ & universal bulk baseline & \S\ref{app:E:E2}, \S\ref{app:E:E5} \\
+$\etaAPS(\Nilthree)$ & $+1/2$ & strict spectral core & \S\ref{app:E:E10} \\
+$\Ntop(\Sthree)$ & $6 r_0^2$ & frame-bundle-norm.\ torsional-charge core & \S\ref{app:E:E9} \\
+EC slice branch & present for $\Nilthree, \Solthree$ & spin-0 bulk branch & \S\ref{app:E:E5b} \\
+$m^2(A_1) = m^2(A_2)$ in $\Solthree$ & $-L^2/(2 r_0^4)$ & biaxial KK splitting & \S\ref{app:E:E2}, \S\ref{app:E:E5} \\
+$C^2_\LC(\Nilthree)$ & $4/(3 R^4)$ & scaffold datum & \S\ref{app:E:E7} \\
+$C^2_\LC(\Solthree)$ & $16/(3 R^4)$ & scaffold datum & \S\ref{app:E:E7} \\
+$k_{3D}^{\mathrm{tor\text{-}CS}}/k_{4D}^{\NY}$ & $1/2$ & NY--CS normalisation identity & \S\ref{app:E:E11} \\
+$Q_{\mathrm{best}} = \eta(0)/\Delta k_{\mathrm{matter}}$ & $1$ & normalisation-free invariant & \S\ref{app:E:E12} \\
+$k_q$ (formal) & $\in\mathbb{Z}$ & reduced CS level integrality & \S\ref{app:E:E13} \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Representative benchmark values.}
+\label{tab:appA_values}
+\end{table}
+
+\subsection{The Three 3-Forms and Their Connection}
+\label{app:A:3forms}
+
+We carefully separate the following 3-forms.
+
+\begin{itemize}
+  \item $\Ctor$: torsion-CS form.
+  \item $\Csig$: spinor CS form.
+  \item $\Cadj$: adjoint CS form.
+\end{itemize}
+
+The CZ inflow corresponds to $\Ctor$, and the APS spectral entry to $\Csig$.
+In the body these must not be conflated.  Conceptually
+\begin{equation}
+  \mathrm{NY} = \dd\Ctor,
+\end{equation}
+and $\Cadj$ appears at intermediate stages of the APS argument.
+
+\subsection{Geometric Scaffold Quantities}
+\label{app:A:scaffold}
+
+The following quantities, although not observable families themselves, are
+used to record the distinctness of the background geometries.
+
+\begin{itemize}
+  \item $C^2_\LC$: magnitude of the Levi--Civita Weyl curvature.
+  \item spin-2 rigidity tag: scaffold label summarising the zero pattern of
+        the squash / shear Hessian.
+  \item $\AKK / K^2$: magnitude of the KK anisotropy, with
+        \begin{equation}
+          \AKK := \sum_{i=0}^{2}(m_i^2 - \bar m^2)^2,
+          \qquad
+          \bar m^2 := \frac{1}{3}\sum_{i=0}^{2} m_i^2,
+          \qquad
+          K^2 := \KMxw^2.
+        \end{equation}
+\end{itemize}
+
+This scaffold layer does not define an additional observable family, but it
+is indispensable for distinguishing geometries such as $\Tthree$ and
+$\Solthree$ that share the absence of a local CS core.  In particular,
+$\Solthree$ is CS-inert yet carries an EC slice minimum and frame rigidity.
+
+The benchmark values $\AKK / K^2$ can be computed directly from the mass
+dictionaries:
+
+\begin{itemize}
+  \item $\Tthree$: $m_i^2 = 0$, so $\AKK / K^2 = 0$.
+  \item $\Nilthree$ (uniaxial $m_2^2 = \KMxw$): $\bar m^2 = K/3$,
+        $\AKK = 2(K/3)^2 + (2K/3)^2 = (2/3)K^2$.
+  \item $\Sthree$ (triplet $m_i^2 = -2L^2/r_0^4$): all $i$ equal, so
+        $\AKK / K^2 = 0$.
+  \item $\Solthree$ (biaxial $m_1^2 = m_2^2 = \KMxw$): $\bar m^2 = 2K/3$,
+        $\AKK = (2K/3)^2 + 2(K/3)^2 = (2/3)K^2$.
+\end{itemize}
+
+This symbolic confirmation is performed in
+\texttt{proofs/kk\_higgsing.py}.

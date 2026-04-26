@@ -1,0 +1,75 @@
+%==============================================================================
+% Appendix C: KK vs Matsubara coexistence tables
+%==============================================================================
+\section{KK vs.\ Matsubara Coexistence Tables}
+\label{app:C}
+
+This appendix tabulates the two readings of the same Euclidean circle.  The
+purpose is to make it visible at a glance that the KK reading and the
+Matsubara-style thermal reading coexist as secondary readings of the same
+Euclidean data.
+
+\subsection{Basic Coexistence Table}
+\label{app:C:basic}
+
+\begin{table}[H]
+\centering\small
+\begingroup
+\renewcommand{\arraystretch}{2.0}
+\begin{tabularx}{\linewidth}{YYYcY}
+\toprule
+\shortstack{Same Euclidean\\quantity} & KK reading & \shortstack{Matsubara\\reading} & coexist? & Caution \\
+\midrule
+$\Sone$ length $L$ & compactification scale & inverse-temperature\newline circle with $\beta = L$ & yes & same circle, two readings \\
+Maxwell baseline & reduced kinetic baseline & thermal stiffness scale & yes & shared coefficient\newline does not imply identity \\
+CS-active structure & reduced active\newline channel count & thermal parity-odd\newline channel count & yes & interpretation differs \\
+$\SCZ$ & reduced inflow action & interface free-energy\newline descriptor & yes & not a real-time statement \\
+branch label & reduced branch language & thermal branch language & yes & not a full\newline finite-temperature derivation \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\caption{KK vs.\ Matsubara coexistence table.}
+\label{tab:appC_basic}
+\end{table}
+
+The point of this table is to distinguish ``shared coefficient'' from
+``identical theory''.  The fact that the same Euclidean quantity admits two
+descriptor languages does not imply complete agreement of the two
+theoretical readings.
+
+\subsection{Representative Quantities and the Two Readings}
+\label{app:C:rep}
+
+\begin{table}[H]
+\centering\small
+\begingroup
+\renewcommand{\arraystretch}{2.0}
+\begin{tabularx}{\linewidth}{YYYY}
+\toprule
+Native quantity & \shortstack{KK /\\reduced reading} & \shortstack{Matsubara /\\thermal reading} & Remark \\
+\midrule
+$\KMxw$ & reduced kinetic baseline & thermal stiffness scale & same coefficient,\newline different interpretation \\
+CS direction\newline count & reduced parity-odd\newline channel count & thermal parity-odd\newline channel count & counting survives,\newline meaning differs \\
+$\etaAPS$ & lower-dimensional\newline spectral asymmetry & thermal spectral descriptor & not a transport coefficient\newline by itself \\
+$\Ntop$ & reduced interface CS jump & thermal torsional-sector label & remains frame-bundle-norm.\ torsional charge \\
+$\SCZ$ & reduced inflow functional & thermal interface\newline free-energy descriptor & Euclidean, not real-time \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\caption{Representative quantities and the two readings.}
+\label{tab:appC_rep}
+\end{table}
+
+\subsection{Interpretive Distinction and Scope}
+\label{app:C:scope}
+
+The KK reading provides a lower-dimensional descriptor language and the
+Matsubara reading provides a thermal descriptor language.  The two are based
+on the same Euclidean circle, but neither claims theoretical identity with
+the other.
+
+The Matsubara reading preserves the original product structure
+$M^3\times \Sone$, so within the scope of this paper it furnishes a
+$P=0$-protected thermal sector.  The thermal language here therefore does
+not include the derivation of full finite-temperature field theory, the
+complete analysis of the Matsubara sum, or real-time transport.

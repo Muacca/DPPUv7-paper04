@@ -1,0 +1,86 @@
+%==============================================================================
+% Appendix D: Computational notes and normalization chain
+%==============================================================================
+\section{Computational Notes and Normalisation Chain}
+\label{app:D}
+
+This appendix collects the normalisation chain and the descriptor separation
+used in the body.  Only the minimum auxiliary material needed to keep the
+main dictionary distinct from the secondary readings is recorded.
+
+\subsection{Geometric Response and Descriptors}
+\label{app:D:descriptor}
+
+We distinguish the geometric response itself from the descriptor that
+expresses it in another language.  The primary object of the body is always
+the geometric response dictionary, while the KK reading and the
+Matsubara-style thermal reading are secondary interpretations attached to
+it.
+
+\begin{itemize}
+  \item \textbf{geometric response}: the primary object of the body.
+  \item \textbf{reduced descriptor}: a description in lower-dimensional
+        language.
+  \item \textbf{thermal descriptor}: a description in thermal language.
+\end{itemize}
+
+This distinction prevents conflating the response dictionary with the
+re-reading languages.  For example, $\KMxw$ is simultaneously a native
+geometric quantity, a reduced kinetic baseline, and a thermal stiffness
+scale; this does not imply that the three are mutually identical.
+Likewise, $\etaAPS$ and $\Ntop$ both admit lower-dimensional / thermal
+descriptors, but as observable families they are distinct.
+
+\subsection{Normalisation Chain}
+\label{app:D:chain}
+
+The normalisation patch of the CZ boundary term should be read along the
+chain
+\begin{equation}
+  \mathrm{NY} = \dd \Ctor
+  \;\Longrightarrow\;
+  \int_{X_4}\mathrm{NY} = \int_{M_3}\Ctor
+  \;\Longrightarrow\;
+  \Ntop := \frac{1}{4\pi^2}\int_{M_3}\Ctor
+  \;\Longrightarrow\;
+  \SCZ[M_3] = \frac{k_{\mathrm{cl}}}{4\pi^2}\int_{M_3}\Ctor.
+\end{equation}
+The torsional boundary term, the frame-bundle-normalised torsional charge,
+and the inflow action are thus seen to be different representations within
+the same $\Ctor$ sector.  The fact that the $1/(4\pi^2)$ normalisation
+corresponds to $T_R = 1$ (frame-bundle Chern-class unit) and that
+$\Ntop = 6 r_0^2$ in $\Sthree$ is derived in Appendix~\ref{app:E:E9}.
+
+The APS spectral entry is not part of this chain.  $\etaAPS$ belongs to the
+spectral family carried by $\Csig$ and must be treated as an observable
+distinct from $\Ntop$ and $\SCZ$, which are defined directly from $\Ctor$.
+The reason for adopting the three-family taxonomy is precisely that the
+family distinction is not erased by this normalisation chain.
+
+\subsection{Reduced-Side Consistency Statements}
+\label{app:D:consistency}
+
+Under the KK reduction reading, the lower-dimensional parity-odd language
+admits the following three consistency statements:
+\begin{equation}
+  k_{3D}^{\mathrm{tor\text{-}CS}} = \frac{1}{2}\,k_{4D}^{\NY},
+  \qquad
+  Q_{\mathrm{best}} := \frac{\eta(0)}{\Delta k_{\mathrm{matter}}} = 1,
+  \qquad
+  k_q\in\mathbb{Z}.
+\end{equation}
+The first is the correspondence between the 4D Nieh--Yan coefficient and
+the 3D torsion-Chern--Simons coefficient (KK reduction normalisation
+identity; Appendix~\ref{app:E:E11}; verification:
+\texttt{proofs/kk\_normalization.py}).  The second is a normalisation-free
+quotient using a spectral quantity and a matter shift (matter-minimal
+inflow audit; Appendix~\ref{app:E:E12}).  The third is the integrality
+condition of the reduced Chern--Simons level (formal quantisation on the
+frame bundle; Appendix~\ref{app:E:E13}).
+
+In this paper these are not added to the boundary observable family as new
+entries.  Instead, they are positioned as consistency statements that arise
+when reading the Euclidean geometric response dictionary already given in
+the body in lower-dimensional language.  We do not claim a complete
+identification between these reduced-side statements and the native
+geometric quantities.

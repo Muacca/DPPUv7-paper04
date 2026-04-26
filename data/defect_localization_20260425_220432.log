@@ -1,0 +1,57 @@
+================================================================
+Verification: Reduced 1D eta-mode defect localization
+Target: Appendix E.6
+================================================================
+
+  Reduced 1D AX benchmark:
+    K_geo(z) = M_geo(z) = c_geo rho(z)
+    c_T3 = c_Nil3 = c_Sol3 = 96 pi^4   (L = kappa = 1)
+    c_S3 = 12 pi^2                     (L = kappa = 1)
+  rho0 = 3.0
+  Variational benchmark for Gaussian R-dips:
+    E_var(lambda) / M0 = 1 - A sqrt(pi) w lambda + O(lambda^2)
+    so any Gaussian dip with A > 0 has at least one bound state.
+
+  Grid: N = 4001, z in [-18.0, 18.0], dz = 0.00900
+
+  Exact eta-mass data from current dppu:
+    T3  : c_geo = 9351.2727   M_geo = 96*pi**4*L*r/kappa**2
+    Nil3: c_geo = 9351.2727   M_geo = 96*pi**4*L*R/kappa**2
+    S3  : c_geo = 118.4353   M_geo = 12*pi**2*L*r/kappa**2
+    Sol3: c_geo = 9351.2727   M_geo = 96*pi**4*L*R/kappa**2
+
+----------------------------------------------------------------
+  topology  profile             A     w/r0   E_min         E_var         M_0           localized?
+----------------------------------------------------------------
+  T3        dip-A03-w1.0R0       0.3    1.0    23383.6892    23780.9064    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 7.4504e-01   E_var < M0 ? YES
+  T3        dip-A05-w2.0R0       0.5    2.0    16434.3880    16987.3964    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.7202e+00   E_var < M0 ? YES
+  T3        dip-A07-w1.0R0       0.7    1.0    13390.7301    14061.2298    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.4056e+00   E_var < M0 ? YES
+  Nil3      dip-A03-w1.0R0       0.3    1.0    23383.6892    23780.9064    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 7.4504e-01   E_var < M0 ? YES
+  Nil3      dip-A05-w2.0R0       0.5    2.0    16434.3880    16987.3964    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.7202e+00   E_var < M0 ? YES
+  Nil3      dip-A07-w1.0R0       0.7    1.0    13390.7301    14061.2298    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.4056e+00   E_var < M0 ? YES
+  S3        dip-A03-w1.0R0       0.3    1.0      296.1579      301.1887      355.3058  LOCALIZED
+    variational minimizer: lambda*w = 7.4504e-01   E_var < M0 ? YES
+  S3        dip-A05-w2.0R0       0.5    2.0      208.1440      215.1479      355.3058  LOCALIZED
+    variational minimizer: lambda*w = 1.7202e+00   E_var < M0 ? YES
+  S3        dip-A07-w1.0R0       0.7    1.0      169.5956      178.0876      355.3058  LOCALIZED
+    variational minimizer: lambda*w = 1.4056e+00   E_var < M0 ? YES
+  Sol3      dip-A03-w1.0R0       0.3    1.0    23383.6892    23780.9064    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 7.4504e-01   E_var < M0 ? YES
+  Sol3      dip-A05-w2.0R0       0.5    2.0    16434.3880    16987.3964    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.7202e+00   E_var < M0 ? YES
+  Sol3      dip-A07-w1.0R0       0.7    1.0    13390.7301    14061.2298    28053.8182  LOCALIZED
+    variational minimizer: lambda*w = 1.4056e+00   E_var < M0 ? YES
+----------------------------------------------------------------
+
+  Localization count: 12 / 12
+  Variational upper-bound count: 12 / 12
+
+================================================================
+RESULT: PASS  (4 topologies x 3 Gaussian R-dip profiles: variational proof + numerical bound state)
+================================================================

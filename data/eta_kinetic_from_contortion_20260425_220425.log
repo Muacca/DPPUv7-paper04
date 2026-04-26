@@ -1,0 +1,45 @@
+========================================================================
+Verification: K_geo from AX contortion gradient
+Target: Appendix E.6
+========================================================================
+
+[1] AX torsion -> contortion contractions
+------------------------------------------------------------------------
+  T_abc T^abc                  = 24*eta**2/rho**2   [OK]
+  K_abc K^abc                  = 6*eta**2/rho**2   [OK]
+  (d_z K_abc)(d_z K^abc)       = 6*eta_z**2/rho**2   [OK]
+
+[2] Four-geometry volume factors and coefficient match
+------------------------------------------------------------------------
+  T3:
+    Vol_geo(rho)                    = 16*pi**4*L*r**3
+    mass from K_abc K^abc            = 96*pi**4*L*r/kappa**2
+    kinetic from d_z K contraction   = 96*pi**4*L*r/kappa**2
+    6 Vol/(kappa^2 rho^2)            = 96*pi**4*L*r/kappa**2
+    homogeneous d2V/deta2            = 96*pi**4*L*r/kappa**2
+    mass/kinetic/engine/expected     = PASS
+  Nil3:
+    Vol_geo(rho)                    = 16*pi**4*L*R**3
+    mass from K_abc K^abc            = 96*pi**4*L*R/kappa**2
+    kinetic from d_z K contraction   = 96*pi**4*L*R/kappa**2
+    6 Vol/(kappa^2 rho^2)            = 96*pi**4*L*R/kappa**2
+    homogeneous d2V/deta2            = 96*pi**4*L*R/kappa**2
+    mass/kinetic/engine/expected     = PASS
+  S3:
+    Vol_geo(rho)                    = 2*pi**2*L*r**3
+    mass from K_abc K^abc            = 12*pi**2*L*r/kappa**2
+    kinetic from d_z K contraction   = 12*pi**2*L*r/kappa**2
+    6 Vol/(kappa^2 rho^2)            = 12*pi**2*L*r/kappa**2
+    homogeneous d2V/deta2            = 12*pi**2*L*r/kappa**2
+    mass/kinetic/engine/expected     = PASS
+  Sol3:
+    Vol_geo(rho)                    = 16*pi**4*L*R**3
+    mass from K_abc K^abc            = 96*pi**4*L*R/kappa**2
+    kinetic from d_z K contraction   = 96*pi**4*L*R/kappa**2
+    6 Vol/(kappa^2 rho^2)            = 96*pi**4*L*R/kappa**2
+    homogeneous d2V/deta2            = 96*pi**4*L*R/kappa**2
+    mass/kinetic/engine/expected     = PASS
+
+========================================================================
+RESULT: PASS  (AX contortion gradient independently gives K_geo = M_geo)
+========================================================================

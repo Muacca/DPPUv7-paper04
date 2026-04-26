@@ -1,0 +1,270 @@
+%==============================================================================
+% Section 5: Selection rules
+%==============================================================================
+\section{Selection Rules}
+\label{sec:rules}
+
+This section compresses the results of \S\S\ref{sec:baseline}--\ref{sec:boundary}
+into selection rules.  What matters is less the detail of individual
+computations than a rule set surveying ``which response is allowed,
+protected, or activated in which geometry''.  The selection rules are not a
+restatement of the inventory; they translate the comparison of the four
+geometries into reusable decision rules.
+
+\subsection{Bulk Rules}
+\label{sec:rules:bulk}
+
+The principal rules of the bulk layer can be summarised as follows.  The
+geometric origin of each rule is collected first in the following table.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+Rule & Geometric source \\
+\midrule
+R1 & geometry-independence of the Maxwell action \\
+R2 & presence/absence of off-diagonal structure constants \\
+R3 & mass-splitting pattern of the KK vector sector \\
+R4 & EC slice-minimum branch in the scalar potential \\
+R5 & localisation well opened by the reduced 1D $\eta$-benchmark and its activation conditions \\
+\bottomrule
+\end{tabular}
+\caption{Geometric source of each bulk rule.}
+\label{tab:bulk_rules_source}
+\end{table}
+
+\paragraph{R1: Maxwell universality.}
+The Maxwell baseline is common to the four geometries:
+\begin{equation}
+  \KMxw = -\frac{L^2}{2r_0^4}
+\end{equation}
+is the master coefficient for all four.  Geometry dependence is therefore
+not in the kinetic baseline but on the side of the activated channels.
+
+\textit{Justify.}  The principal part of Maxwell originates from the abelian
+quadratic term $F_{ij}F^{ij}$, while the structure constants enter only the
+lower-order mass / CS terms via the modified field strength.  Under the
+common product-circle convention, the principal coefficient is therefore
+fixed to $-L^2/(2r_0^4)$ for all four geometries (Appendix~\ref{app:E:E2b};
+verification: \texttt{proofs/kk\_higgsing.py}).
+
+\paragraph{R2: CS activation rule.}
+The Chern--Simons channel is activated only when the correction to
+$\tilde{F}_{ij}$ has its leg outside $\{i,j\}$.  $\Nilthree$ (one direction)
+and $\Sthree$ (three directions) follow this rule; the self-referential
+correction of $\Solthree$ cancels exactly.
+
+\textit{Justify.}  Classifying the correction type into ``no structure
+constant / off-diagonal / self-referential'' fixes the CS direction count
+algebraically as $0/1/3/0$ (Appendix~\ref{app:E:E4}).  In $\Solthree$ the
+legs of $A_1\to\tilde{F}_{01}$ and $A_2\to\tilde{F}_{02}$ lie inside the
+field-strength index pair, so the CS coefficient remains zero for any
+profile-local coefficients $c_{01}(z), c_{02}(z)$ (verification:
+\texttt{proofs/cs\_cancellation.py}).  This is a statement about the
+profile-local reduced KK ansatz, not the derivation of the full
+derivative-dependent inhomogeneous field equation.
+
+\paragraph{R3: Higgsing classification.}
+The KK Higgsing pattern is classified into the four types
+none / uniaxial / triaxial / biaxial; in this order each is realised exactly
+once by $\Tthree, \Nilthree, \Sthree, \Solthree$, providing the most direct
+compression of the bulk-sector mode dictionary.
+
+\textit{Justify.}  Direct computation of the KK mass dictionaries gives
+massive counts $0, 1, 3, 2$, exactly exhausting the four types
+(Appendix~\ref{app:E:E5}).
+
+\paragraph{R4: EC slice-minimum rule.}
+A horizontal evaluation of the homogeneous EC + NY + Weyl potential of the
+current DPPU library across the four geometries shows that an EC slice
+minimum on the $\eta=V=0$ section exists in $\Nilthree$ and $\Solthree$ and
+is absent in $\Tthree$ and round $\Sthree$.  Hence $\Nilthree$ carries the
+spin-0 entry where CS and EC simultaneously rise, while $\Solthree$ carries
+the CS-inert but EC-active rigid entry.
+
+\textit{Justify.}  Paper~III (EC) \cite{paper3ec} shows analytically
+\begin{equation}
+  r_0 = \frac{4\kappa}{\sqrt{3}}\sqrt{|\alpha|},
+  \qquad
+  |\kappa^2 \theta_\NY| < 1 \Rightarrow \text{full homogeneous local minimum}.
+\end{equation}
+For $\Solthree$ the same $r_0$ and the same Hessian criterion hold, with the
+slice potential and $H_{RR}$ four times those of $\Nilthree$.  $\Tthree$ has
+no isolated radial branch on the flat zero slice, and round $\Sthree$ has
+non-zero slope and no stationary point (Appendix~\ref{app:E:E5b};
+verification: \texttt{paper04/ec\_slice\_minima.py}).
+
+\paragraph{R5: reduced $\eta$-benchmark localisation rule.}
+On the reduced 1D AX-torsion benchmark over a slice-wise homogeneous
+background, the Gaussian radial dip produces a localisation well in all four
+geometries.  Progress to a local parity-odd activated response, however,
+requires CS-active structure.  Hence $\Nilthree$ is activated by CS+EC,
+$\Sthree$ by CS+triplet/nonlinear opening, $\Tthree$ is kinematic / trivial,
+and $\Solthree$ is EC-supported but CS-inert.
+
+\textit{Justify.}  The current \texttt{dppu} library yields the exact
+homogeneous datum
+\begin{equation}
+  M_{\mathrm{geo}} = \left.\frac{\partial^2 \Veff}{\partial \eta^2}\right|_{\eta=0}
+  = c_{\mathrm{geo}}\,\rho,
+\end{equation}
+and the reduced 1D kinetic datum from the AX contortion gradient agrees:
+$K_{\mathrm{geo}} = c_{\mathrm{geo}}\,\rho$, with
+$c_{\Tthree} = c_{\Nilthree} = c_{\Solthree} = 96\pi^4 L/\kappa^2$ and
+$c_{\Sthree} = 12\pi^2 L/\kappa^2$.  The variational evaluation for a
+Gaussian $\rho$-dip then guarantees at least one bound state analytically
+for all four geometries, and the representative benchmark scan confirms
+LOCALIZED in all $4 \times 3 = 12$ examples
+(Appendix~\ref{app:E:E6}; verification:
+\texttt{paper04/eta\_defect\_coefficients.py},
+\texttt{paper04/defect\_localization.py}).
+The differences in response are determined not by localisation itself but by
+whether CS activation (R2), the EC slice minimum (R4), or the
+triplet/nonlinear opening is present in the subsequent stage: $\Nilthree$
+has CS+EC, $\Sthree$ has CS+triplet, $\Solthree$ has EC alone, and $\Tthree$
+has none.
+
+The bulk rules above show that the four geometries can be compared in the
+form ``universal baseline + geometry-dependent activation pattern''.  In
+particular, $\Solthree$ does not introduce a CS-active family but, since it
+carries an EC slice minimum, is not placed in the same minimal bulk class as
+$\Tthree$.  $\Solthree$ remains as the CS-inert, EC-active, rigid geometry.
+
+\subsection{Boundary Rules}
+\label{sec:rules:boundary}
+
+The principal rules of the boundary/cobordism layer are as follows.
+
+\paragraph{B1: CZ inflow activation rule.}
+The CZ inflow is activated only in CS-active geometries.  The torsion-CS
+sector vanishes in $\Tthree$ and $\Solthree$ and a non-trivial inflow
+remains only in $\Nilthree$ and $\Sthree$.
+
+\textit{Justify.}  $\SCZ\propto\int\Ctor$ is non-zero only when the bulk CS is
+active, in one-to-one correspondence with the CS direction count
+$0/1/3/0$ of R2.
+
+\paragraph{B2: local spectral-core rule.}
+A strict local APS spectral core appears representatively in $\Nilthree$
+with canonical value
+\begin{equation}
+  \etaAPS(\Nilthree) = +\frac{1}{2}.
+\end{equation}
+This entry belongs to the spinor spectral family and must not be conflated
+with the torsion-CS family.
+
+\textit{Justify.}  The Heisenberg mode decomposition shows $h=0$ for PPA and
+that only the $n=0$ spin-up branch carries the asymmetry.  The value is
+fixed by the Levi--Civita spinor CS integral $\int_Y\Csig = -1/2$ together
+with the orientation convention $\etaAPS = -\int_Y\Csig$, giving
+$\etaAPS = +1/2$ and $\eta(0) = 1$ (Appendix~\ref{app:E:E10};
+verification: \texttt{paper04/eta\_aps\_nil3.py}).  As benchmarks, the PPA
+$\Tthree$ and the round $\Sthree$ Levi--Civita Dirac have spectra exactly
+symmetric under $\lambda\leftrightarrow -\lambda$, so $\etaAPS = 0$
+(verification: \texttt{proofs/aps\_zero\_t3\_s3.py}).  On the compact
+$\Solthree$ benchmark the local CS integral vanishes, but $\etaAPS$
+branches as $1/0$ between Sol-P and Sol-A; $\Solthree$ is therefore treated
+as a global spectral branch rather than a local core
+(Appendix~\ref{app:E:E10b}; verification:
+\texttt{proofs/eta\_aps\_sol3.py}).
+
+\paragraph{B3: torsional-charge rule.}
+The torsional-charge entry appears representatively in $\Sthree$ with
+canonical value
+\begin{equation}
+  \Ntop = 6 r_0^2.
+\end{equation}
+This is the reason that pairs containing $\Sthree$ are torsional-charge-led
+in the pairwise cobordism dictionary.
+
+\textit{Justify.}  Starting from the structure constants
+$C^i{}_{jk} = (4/r_0)\,\epsilon^i{}_{jk}$ of $\Sthree$, one obtains
+$T^i = \tfrac{1}{2}C^i{}_{jk}\,e^j\wedge e^k$,
+$\Ctor = (12/r_0)\,\mathrm{vol}_{\Sthree}$, and hence
+$\int_{\Sthree}\Ctor = 24\pi^2 r_0^2$.  Dividing by the frame-bundle
+normalisation $1/(4\pi^2)$ ($\pi_3(SO(3)) = \mathbb{Z}$, $T_R = 1$) gives
+$\Ntop = 6 r_0^2$ (Appendix~\ref{app:E:E9}; verification:
+\texttt{paper04/torsional\_charge.py}).
+
+\paragraph{B4: spectral-source rule.}
+Within the spectral family, one must distinguish not only the presence/absence
+of the observable but also the source mechanism.  $\Nilthree$ has a local
+spectral core supported by a non-zero Levi--Civita spinor CS integral, while
+$\Solthree$ may have a global spectral branch sourced by kernel data
+depending on the compact quotient and spin structure.
+
+\textit{Justify.}  In $\Nilthree$, $\int_Y\Csig = -1/2$ directly fixes
+$\etaAPS = +1/2$ (B2).  In $\Solthree$ on the compact mapping-torus
+benchmark $M_A = T^2\rtimes_A \Sone$ the local CS integral remains
+$\int_Y\Csig = 0$, while constant spinors in the $k=0$ sector descend only
+under Sol-P, giving $h = 2/0$ and (with antilinear symmetry $\eta(0)=0$)
+$\etaAPS(\text{Sol-P/Sol-A}) = 1/0$ (Appendix~\ref{app:E:E10b};
+verification: \texttt{proofs/eta\_aps\_sol3.py}).  Hence $\Nilthree$ and
+$\Solthree$ share the spectral family but not the same source.
+
+\subsection{Pairwise Rules}
+\label{sec:rules:pairwise}
+
+The pairwise cobordism dictionary furnishes the following rules.
+
+\begin{itemize}
+  \item Pairs containing $\Sthree$ tend to be torsional-charge-led.
+        $\Sthree$ carries the canonical frame-bundle-normalised
+        torsional-charge core in the second layer (B3) and the bulk side
+        possesses an isotropic activation structure (3-direction CS +
+        triplet degeneracy, R2/R3).  However,
+        $\Sthree\leftrightarrow\Solthree$ is torsional-charge-led on Sol-A
+        and a torsional / global-spectral mixed pair on Sol-P.
+  \item Pairs containing $\Nilthree$ tend to be spectrally led.  In
+        $\Tthree\leftrightarrow\Nilthree$ the local APS core is the subject
+        of comparison; in $\Nilthree\leftrightarrow\Solthree$ the
+        ``local vs.\ global'' source distinction within the spectral family
+        becomes the subject.  This is because $\Nilthree$ carries both an EC
+        slice minimum (R4) and CS-active structure, and is the only Levi--Civita
+        Dirac PPA case with a non-zero local CS core
+        (Appendices~\ref{app:E:E10},~\ref{app:E:E10b}).  $\Solthree$ also
+        carries an EC slice minimum but no local CS core, so its source
+        mechanism is not identical to that of $\Nilthree$.
+  \item $\Sthree\leftrightarrow\Nilthree$ is the representative mixed pair
+        crossing the torsional-charge family ($\Ctor$) and the local
+        spectral family ($\Csig$).  Since the two belong to different
+        3-form sectors, they cannot be reduced to a single scalar
+        observable (3-form distinction: Appendix~\ref{app:E:E8}).
+  \item $\Tthree\leftrightarrow\Solthree$ is not a uniformly inert minimal
+        pair but a benchmark pair sensitive to compact quotient / spin
+        structure.  Sol-A coincides with the trivial spectral profile of
+        $\Tthree$, while Sol-P raises a global spectral branch with
+        $\etaAPS = 1$.  The scaffold differences ($C^2_\LC$, spin-2
+        rigidity tag, $\AKK/K^2$) are preserved in both.
+\end{itemize}
+
+\subsection{Spectral Source and Geometric Distinctness}
+\label{sec:rules:source}
+
+A particularly important point about the selection rules is to avoid
+conflating ``belonging to the same family'' with ``the value being
+determined by the same source''.  Both $\Nilthree$ and $\Solthree$ may
+appear in the spectral family, yet $\Nilthree$ is fixed by the local
+Levi--Civita CS integral while $\Solthree$ is fixed by global kernel data
+depending on compact quotient / spin structure.  The same spectral family
+does not imply the same mechanism.
+
+$\Tthree$ is flat and inert, while $\Solthree$ carries a non-vanishing Weyl
+curvature, biaxial KK splitting, and frame rigidity.  Even where Sol-A makes
+the boundary observable coincide with the $\Tthree$ trivial benchmark, the
+background geometries do not coincide.  Conversely, on Sol-P a global
+spectral branch is added and $\Solthree$ separates from $\Tthree$ already
+at the second layer.  This distinction does not require introducing a
+third or fourth observable family but reflects differences in the geometric
+scaffold and global spectral sourcing that support the observables.  The
+selection rules of this paper therefore deliberately separate ``compression
+of observable classes'' from ``characterisation of background geometry''.
+
+\subsection{Summary}
+\label{sec:rules:summary}
+
+By bringing the selection rules to the foreground, the inventory becomes
+readable as a comparison structure linked to geometry-dependent rules.  The
+next section retains this principal structure and discusses two readings of
+the Euclidean circle.

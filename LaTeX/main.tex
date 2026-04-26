@@ -1,0 +1,309 @@
+%==============================================================================
+% Euclidean Geometric Response Dictionary and Selection Rules
+% for Four Thurston Geometries
+%==============================================================================
+\documentclass[12pt,a4paper]{article}
+
+%------------------------------------------------------------------------------
+% Packages
+%------------------------------------------------------------------------------
+
+% Fonts / encoding
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[final]{microtype}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xurl} % \path の改行を強くする
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\code}[1]{\path{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% TikZ for diagrams
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+
+% Layout and formatting
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Misc (xcolor before hyperref)
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+% References and links
+\definecolor{linkblue}{RGB}{0,0,180}
+\usepackage[colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue]{hyperref}
+\usepackage{cleveref}
+
+% Code listings (for appendices)
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  language=Python
+}
+
+% Section break
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+%------------------------------------------------------------------------------
+% Theorem environments
+%------------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+%------------------------------------------------------------------------------
+% Custom commands
+%------------------------------------------------------------------------------
+% Math shortcuts
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Veff}{V_{\mathrm{eff}}}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\EC}{\mathrm{EC}}
+\newcommand{\NY}{\mathrm{NY}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\Tr}{\mathrm{Tr}}
+
+% Topology notation
+\newcommand{\Sthree}{S^3}
+\newcommand{\Tthree}{T^3}
+\newcommand{\Nilthree}{\mathrm{Nil}^3}
+\newcommand{\Solthree}{\mathrm{Sol}^3}
+\newcommand{\Sone}{S^1}
+
+% Response notation
+\newcommand{\KMxw}{K_{\mathrm{Mxw}}}
+\newcommand{\Ntop}{N_{\mathrm{top}}}
+\newcommand{\etaAPS}{\eta_{\mathrm{APS}}^{(3D)}}
+\newcommand{\Cthree}{\mathcal{C}_3}
+\newcommand{\Ctor}{\mathcal{C}_3^{\mathrm{tor}}}
+\newcommand{\Csig}{\mathcal{C}_3^{\sigma}}
+\newcommand{\Cadj}{\mathcal{C}_3^{\mathrm{adj}}}
+\newcommand{\SCZ}{S_{\mathrm{CZ}}}
+\newcommand{\AKK}{A_{\mathrm{KK}}}
+
+%------------------------------------------------------------------------------
+% Title and author
+%------------------------------------------------------------------------------
+\title{Euclidean Geometric Response Dictionary and Selection Rules\\
+for Four Thurston Geometries}
+
+\author{Muacca}
+
+\date{}
+
+%==============================================================================
+\begin{document}
+%==============================================================================
+
+\maketitle
+\begin{center}
+Version: v1\\
+First release: 2026-04-26
+\end{center}
+
+%------------------------------------------------------------------------------
+% Abstract
+%------------------------------------------------------------------------------
+\begin{abstract}
+We analyse Einstein--Cartan gravity with a Nieh--Yan term on the common
+$M^3\times\Sone$ minisuperspace and construct, across the four Thurston
+geometries $\Tthree$, $\Nilthree$, $\Sthree$, and $\Solthree$, a
+\emph{Euclidean geometric response dictionary} together with the corresponding
+\emph{selection rules}.  The dictionary is organised into two layers.
+
+The first layer is the bulk layer comprising the homogeneous baseline and the
+inhomogeneous/nonlocal response.  It is summarised by a 36-entry inventory and
+furnishes geometry-dependent rules for Maxwell universality, Chern--Simons
+activation, the Higgsing pattern, and the reduced $\eta$-mode
+defect-localisation benchmark.  The second layer is the boundary/cobordism
+layer, which consists of three observable families---spectral,
+torsional-charge, and inflow---and a pairwise cobordism dictionary covering all
+six geometry pairs.
+
+Within this structure, $\Nilthree$ provides a strict local APS spectral entry,
+$\Sthree$ provides a frame-bundle-normalised torsional-charge entry, $\Tthree$
+serves as the trivial spectral benchmark, and $\Solthree$ supports a
+spin-structure-dependent global spectral branch on a compact mapping-torus
+benchmark.  Local and global sources are thereby distinguished within the
+spectral family itself.  The resulting rules organise allowed, protected, and
+activated responses uniformly across the four geometries.
+
+We further give two readings of the same Euclidean circle---a Kaluza--Klein
+(KK) reduction reading and a Matsubara-style thermal reading ($\beta=L$)---and
+show that they coexist as secondary interpretations without being identified
+theoretically.
+\end{abstract}
+
+%------------------------------------------------------------------------------
+% Main text
+%------------------------------------------------------------------------------
+\input{sections/sec01}   % Introduction
+\input{sections/sec02}   % Homogeneous baseline
+\input{sections/sec03}   % Inhomogeneous / nonlocal bulk response
+\input{sections/sec04}   % Boundary / interface response
+\input{sections/sec05}   % Selection rules
+\input{sections/sec06}   % Secondary readings of the Euclidean circle
+\input{sections/sec07}   % Discussion and Outlook
+\input{sections/sec08}   % Conclusion
+
+%------------------------------------------------------------------------------
+% Acknowledgments
+%------------------------------------------------------------------------------
+\section*{Acknowledgments}
+
+The author acknowledges the use of the following AI tools during manuscript
+preparation: Claude Opus~4.7 (Anthropic; accessed 2026-04),
+Gemini~3.1 Pro (Google; accessed 2026-04), Grok 4.3 (xAI; accessed 2026-04),
+and GPT-5.5 Thinking via ChatGPT (OpenAI; accessed 2026-04).
+These tools were used for language editing (including Japanese--English
+translation), outlining and improving exposition, drafting and reviewing
+auxiliary code (scripts and pseudocode) that was subsequently tested and
+validated by the author, and proposing candidate consistency checks and
+alternative derivations to be independently verified by the author.
+
+The AI tools did not determine the scientific claims of this work and were not
+used to generate or modify research data or evidentiary figures.  The author
+takes full responsibility for the content and for any remaining errors.
+
+This work was developed within the informal collaborative project
+\textbf{DPPU} (\textbf{D}onut-like topology, \textbf{P}lanck-scale
+compactness, \textbf{P}recession dynamics, \textbf{U}niverse).
+
+%------------------------------------------------------------------------------
+% Availability and Contact
+%------------------------------------------------------------------------------
+\section*{Availability and Contact}
+
+\paragraph{Code and Data Availability}
+The code and supplemental data associated with this work are available at:
+
+\begin{itemize}
+  \item Zenodo: \texttt{10.5281/zenodo.19775695}
+  \item GitHub: \texttt{https://github.com/Muacca/DPPUv7-paper04}
+\end{itemize}
+
+They are released under the MIT License.
+
+\paragraph{Citation}
+If you use these materials, please cite the associated manuscript and Zenodo record:
+
+\begin{quote}
+\small
+Muacca, ``Euclidean Geometric Response Dictionary and Selection Rules for Four
+Thurston Geometries.''
+\end{quote}
+
+\paragraph{Contact}
+For questions, bug reports, or collaboration inquiries:
+
+\begin{itemize}
+  \item Email: \texttt{muacca@dmwp.jp}
+  \item GitHub Issues: \texttt{https://github.com/Muacca/DPPUv7-paper04/issues}
+\end{itemize}
+
+%------------------------------------------------------------------------------
+% Appendices
+%------------------------------------------------------------------------------
+\appendix
+\input{appendices/appA}  % Notation and Conventions
+\input{appendices/appB}  % Full response inventories
+\input{appendices/appC}  % KK vs Matsubara coexistence tables
+\input{appendices/appD}  % Computational notes and normalization chain
+\input{appendices/appE}  % Derivations and proof sketches
+
+%------------------------------------------------------------------------------
+% References
+%------------------------------------------------------------------------------
+\bibliographystyle{unsrt}
+
+\begin{thebibliography}{99}
+
+\bibitem{paper1}
+Muacca,
+``Topology-Dependent Phase Classification of Effective Potentials
+in Einstein--Cartan + Nieh--Yan Minisuperspace,''
+Zenodo.\ \texttt{10.5281/zenodo.18213677} (2026).
+
+\bibitem{paper2}
+Muacca,
+``Structural Robustness of Isotropic $\Sthree$ Vacua in Einstein--Cartan
+Minisuperspace via Chiral Equilibrium and Weyl Stability,''
+Zenodo.\ \texttt{10.5281/zenodo.18815498} (2026).
+
+\bibitem{paper3}
+Muacca,
+``Unified Geometric Landau EFT of Homogeneous $\Sthree\times\Sone$
+Minisuperspace in Einstein--Cartan + Nieh--Yan Theory,''
+Zenodo.\ \texttt{10.5281/zenodo.19144481} (2026).
+
+\bibitem{paper3ec}
+Muacca,
+``Homogeneous Three-Topology Comparison and Mode Dictionary
+in Einstein--Cartan + Nieh--Yan Theory: Geometric Structure of EC--Weyl Coupling,''
+Zenodo.\ \texttt{10.5281/zenodo.19425147} (2026).
+
+\bibitem{Hehl1976}
+F.~W.~Hehl, P.~von der Heyde, G.~D.~Kerlick, and J.~M.~Nester,
+``General relativity with spin and torsion: Foundations and prospects,''
+Rev.\ Mod.\ Phys.\ \textbf{48}, 393--416 (1976).
+
+\bibitem{NiehYan1982}
+H.~T.~Nieh and M.~L.~Yan,
+``An identity in Riemann--Cartan geometry,''
+J.\ Math.\ Phys.\ \textbf{23}, 373--374 (1982).
+
+\bibitem{Chandia1997}
+O.~Chandia and J.~Zanelli,
+``Topological invariants, instantons, and the chiral anomaly on spaces
+with torsion,''
+Phys.\ Rev.\ D \textbf{55}, 7580--7585 (1997).
+
+\bibitem{APS1975}
+M.~F.~Atiyah, V.~K.~Patodi, and I.~M.~Singer,
+``Spectral asymmetry and Riemannian geometry.~I,''
+Math.\ Proc.\ Camb.\ Phil.\ Soc.\ \textbf{77}, 43--69 (1975).
+
+\bibitem{Redlich1984}
+A.~N.~Redlich,
+``Gauge noninvariance and parity nonconservation of three-dimensional fermions,''
+Phys.\ Rev.\ Lett.\ \textbf{52}, 18--21 (1984).
+
+\bibitem{Thurston1997}
+W.~P.~Thurston,
+\emph{Three-Dimensional Geometry and Topology, Vol.~1},
+Princeton University Press (1997).
+
+\end{thebibliography}
+
+%==============================================================================
+\end{document}
+%==============================================================================

@@ -1,0 +1,131 @@
+%==============================================================================
+% Section 6: Secondary readings of the Euclidean circle
+%==============================================================================
+\section{Secondary Readings of the Euclidean Circle}
+\label{sec:circle}
+
+This section organises two readings of the Euclidean circle $\Sone$.  These
+provide a reduced description and a thermal description on top of the
+already constructed Euclidean response dictionary.  Crucially, the readings
+discussed here do not replace the main dictionary; they supply secondary
+interpretations of the same Euclidean data.
+
+\subsection{KK Reduction Reading}
+\label{sec:circle:kk}
+
+In the KK reading we distinguish the geometric response itself from the
+reduced descriptor that describes it in lower-dimensional language.  The
+effective coefficients and parity-odd channels appearing in the
+lower-dimensional sector are images of the dictionary already constructed,
+not the primary objects themselves.
+
+We also fix the geometric setup used in the KK reduction normalisation
+identity.  When extracting coefficients we treat the Euclidean circle as a
+product/collar direction of length $\beta$ and apply the CZ identity
+$\mathrm{NY} = \dd\Ctor$ together with Stokes' theorem on the relative
+cobordism
+\begin{equation}
+  X^4 = M^3 \times I_\beta, \qquad I_\beta = [0, \beta].
+\end{equation}
+The 3D effective coefficient is defined as a functional on a single physical
+boundary slice $Y = M^3$ that absorbs the volume factor along $I_\beta$, so
+that here $\int_{\partial X^4}\Ctor$ refers to this single-copy boundary
+contribution.  The coefficient $k_{3D}^{\mathrm{tor\text{-}CS}}$ is therefore
+the 3D boundary coefficient obtained under inflow/collar normalisation, not
+a two-endpoint difference along a closed thermal trace.  Where the
+cancellation of the non-zero KK tower is invoked, we assume a real bosonic
+KK decomposition on an untwisted product circle.
+
+For this reduced-side reading the following three consistency statements are
+useful:
+\begin{equation}
+  k_{3D}^{\mathrm{tor\text{-}CS}} = \frac{1}{2}\,k_{4D}^{\NY},
+  \qquad
+  Q_{\mathrm{best}} := \frac{\eta(0)}{\Delta k_{\mathrm{matter}}} = 1,
+  \qquad
+  k_q \in \mathbb{Z}.
+\end{equation}
+The first two give normalisation-free statements about the
+torsional / matter-coupled parity-odd descriptors, and the last gives the
+integrality condition for the reduced Chern--Simons level.
+
+The first identity $k_{3D}^{\mathrm{tor\text{-}CS}} = (1/2)k_{4D}^{\NY}$ is
+obtained algebraically as the 3D torsion-CS level after KK reduction along
+$\Sone$ of the 4D Nieh--Yan action
+$S_\NY = (k_{4D}^{\NY}/8\pi^2)\int \dd\Ctor$
+(KK reduction normalisation identity; Appendix~\ref{app:E:E11};
+verification: \texttt{proofs/kk\_normalization.py}).  Here, on an untwisted
+product circle, the Fourier modes $n$ and $-n$ form complex-conjugate pairs
+and the even weights are determined by $n^2$ alone, so that the parity-odd
+residue takes the form $n\,w(n^2)$.  The non-zero tower therefore cancels
+pairwise and leaves no further parity-odd shift.  The second identity
+$Q_{\mathrm{best}} = 1$ follows from the comparison between the spinor-CS
+and the APS spectral entry: in $\Nilthree$ one has $\eta(0) = 1$ and
+$\Delta k_{\mathrm{matter}} = 1$ (matter-minimal inflow audit;
+Appendix~\ref{app:E:E12}).  The third statement $k_q\in\mathbb{Z}$ is the
+formal quantisation condition required by large gauge transformations
+on the frame bundle, $\pi_3(SO(3)) = \mathbb{Z}$ (formal quantisation on the
+frame bundle; Appendix~\ref{app:E:E13}).  These are not new observable
+families of the second layer but consistency statements that arise when the
+Euclidean response is read in lower-dimensional language.
+
+On the bulk side, the universal Maxwell coefficient
+\begin{equation}
+  \KMxw = -\frac{L^2}{2r_0^4}
+\end{equation}
+is reread as a topology-independent kinetic baseline, while the activated
+Chern--Simons directions, the uniaxial Higgsing of $\Nilthree$, and the
+triplet degeneracy of $\Sthree$ are interpreted as topology-dependent
+channels of the reduced vector sector.  The reduced language is therefore a
+re-reading of the bulk inventory in lower-dimensional form, not something
+prior to the bulk inventory.
+
+On the boundary side, the torsional inflow action, the APS spectral entry,
+and the frame-bundle-normalised torsional charge can likewise be mapped to
+parity-odd descriptors in lower-dimensional language.  However, $\SCZ$ is
+written in terms of $\Ctor$ while $\etaAPS$ belongs to Levi--Civita
+spectral data, so the observable-family distinction is preserved even after
+projecting onto reduced language.  In particular,
+$\etaAPS(\Nilthree) = 1/2$ and $\Ntop(\Sthree) = 6 r_0^2$ both admit
+reduced parity-odd descriptors but are not the same quantity.  We do not
+claim a complete identification between the reduced-side statements and the
+native geometric quantities.
+
+In this sense the KK language does not replace the response dictionary; it
+provides a reduced reading of it.  The coefficient correspondences and the
+normalisation chain are collected in Appendix~\ref{app:D}.
+
+\subsection{Matsubara-Style Thermal Reading}
+\label{sec:circle:matsubara}
+
+In order to overlay a thermal-descriptor reading on the same Euclidean
+circle, we adopt
+\begin{equation}
+  \beta = L
+\end{equation}
+and describe a Matsubara-style thermal reading as the thermal interpretation.
+Here $L$ is the same length of the Euclidean circle that already appears in
+the geometric formulation; the thermal reading does not introduce a new
+circle but assigns thermal meaning to the existing Euclidean data.
+
+Under this interpretation, Maxwell universality, the CS direction-count law,
+the uniaxial Higgsing of $\Nilthree$, and the triplet degeneracy of
+$\Sthree$ remain Euclidean structural entries; only the thermal-descriptor
+language is added to them.  Moreover, the Matsubara reading does not break
+the original product structure $M^3\times \Sone$, so it does not by itself
+generate a new parity-odd source.  In this sense, what we obtain is a
+$P=0$-protected thermal sector, not a full Lorentzian continuation.
+
+The KK reading and the Matsubara-style thermal reading coexist as two
+secondary readings of the same Euclidean circle.  Coexistence on the same
+circle, however, does not imply theoretical identity: the former is a
+lower-dimensional descriptor language and the latter is a thermal
+descriptor language, and the reduced gauge coefficient, boundary inflow
+action, phase labels, etc.\ merely admit both readings.
+
+The thermal reading of this section is deliberately confined to the
+Euclidean scope.  We do not claim a derivation of full finite-temperature
+field theory, a strict construction of the partition function, a detailed
+analysis of the Matsubara sum, or real-time transport.  The KK--Matsubara
+coexistence table is collected in Appendix~\ref{app:C}, and the descriptor
+separation and normalisation chain in Appendix~\ref{app:D}.

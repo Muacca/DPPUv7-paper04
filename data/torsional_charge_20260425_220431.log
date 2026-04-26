@@ -1,0 +1,46 @@
+================================================================
+Verification: frame-bundle-normalized torsional charge N_top(S^3) = 6 r0^2
+Target: Appendix E.9
+================================================================
+
+[1] S^3 structure constants from dppu topology engine
+----------------------------------------------------------------
+  C[0,1,2] = 4/r   expected 4/r   [OK]
+  C[1,2,0] = 4/r   expected 4/r   [OK]
+  C[2,0,1] = 4/r   expected 4/r   [OK]
+  C[0,2,1] = -4/r   expected -4/r   [OK]
+
+[2] Derive C_3^{tor} = e_i ^ T^i from T^i = (1/2) C^i_{jk} e^j ^ e^k
+----------------------------------------------------------------
+  (i,j,k)=(0,1,2):  (1/2) C[0,1,2] epsilon_{012} = 2/r
+  (i,j,k)=(0,2,1):  (1/2) C[0,2,1] epsilon_{021} = 2/r
+  (i,j,k)=(1,0,2):  (1/2) C[1,0,2] epsilon_{102} = 2/r
+  (i,j,k)=(1,2,0):  (1/2) C[1,2,0] epsilon_{120} = 2/r
+  (i,j,k)=(2,0,1):  (1/2) C[2,0,1] epsilon_{201} = 2/r
+  (i,j,k)=(2,1,0):  (1/2) C[2,1,0] epsilon_{210} = 2/r
+
+  C_3^tor density coefficient = 12/r
+  expected                    = 12/r   [OK]
+
+[3] Integrate over S^3
+----------------------------------------------------------------
+  Vol(S^3)              = 2*pi**2*r**3
+  int_{S^3} C_3^tor     = 24*pi**2*r**2
+  expected              = 24*pi**2*r**2   [OK]
+
+[4] Frame-bundle normalization
+----------------------------------------------------------------
+  Convention: N_top := (1/(4 pi^2)) int_{S^3} C_3^{tor}
+  Origin: pi_3(SO(3)) = Z with vector-representation normalization T_R = 1
+  No integrality claim is made for continuous r0 without extra quantization
+  N_top(S^3)            = 6*r**2
+  expected              = 6*r**2   [OK]
+
+[5] Numeric spot checks
+----------------------------------------------------------------
+  r0 = 3: N_top = 54   expected 54   [OK]
+  r0 = 5: N_top = 150   expected 150   [OK]
+
+================================================================
+RESULT: PASS  (S^3 geometry derives frame-bundle-normalized torsional charge N_top = 6 r0^2)
+================================================================

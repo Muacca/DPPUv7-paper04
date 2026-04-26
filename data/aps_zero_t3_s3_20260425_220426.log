@@ -1,0 +1,24 @@
+================================================================
+Verification: APS benchmark zeros on T^3 and round S^3
+================================================================
+
+[1] T^3 benchmark (PPA spin structure)
+----------------------------------------------------------------
+  Spectrum: lambda_k = +/- sqrt(k0^2 + k1^2 + k2^2)
+  PPA benchmark: p2 in Z + 1/2, so k2 never vanishes
+  Therefore h = 0 and the spectrum is paired exactly by lambda <-> -lambda
+  eta(0) = 0, h = 0, eta_APS = 0.0   [OK]
+
+[2] Round S^3 benchmark (Levi-Civita Dirac)
+----------------------------------------------------------------
+  Spectrum: lambda_n = +/- (n + 3/2) / r0, multiplicity (n+1)(n+2)
+  Unique spin structure; no zero mode occurs on round S^3
+  n = 0: lambda = +/- 0.500000, multiplicity = 2
+  n = 1: lambda = +/- 0.833333, multiplicity = 6
+  n = 2: lambda = +/- 1.166667, multiplicity = 12
+  n = 3: lambda = +/- 1.500000, multiplicity = 20
+  eta(0) = 0, h = 0, eta_APS = 0.0   [OK]
+
+================================================================
+RESULT: PASS  (T^3 and round S^3 have symmetric LC spectra)
+================================================================

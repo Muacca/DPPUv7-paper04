@@ -1,0 +1,28 @@
+================================================================
+Verification: Sol3 structure constants and frame rigidity
+Target: Appendix E.1
+================================================================
+
+[1] Closed-form values of nonzero spatial structure constants
+----------------------------------------------------------------
+  C[1,0,1] = 1/R   expected 1/R   [OK]
+  C[1,1,0] = -1/R   expected -1/R   [OK]
+  C[2,0,2] = -1/R   expected -1/R   [OK]
+  C[2,2,0] = 1/R   expected 1/R   [OK]
+
+[2] Frame rigidity: derivatives w.r.t. (epsilon, s)
+----------------------------------------------------------------
+  d/d(eps) C[1,0,1] = 0  [OK]
+  d/d(s)   C[1,0,1] = 0  [OK]
+  d/d(eps) C[2,0,2] = 0  [OK]
+  d/d(s)   C[2,0,2] = 0  [OK]
+
+[3] Effective-potential Hessian in (epsilon, s)
+----------------------------------------------------------------
+  d2V/d(eps)^2 |0 = 0  [OK]
+  d2V/ds^2     |0 = 0  [OK]
+  d2V/deps ds  |0 = 0  [OK]
+
+================================================================
+RESULT: PASS  (Sol3 structure constants exact; frame and Hessian rigid)
+================================================================

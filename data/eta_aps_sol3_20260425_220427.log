@@ -1,0 +1,87 @@
+================================================================
+Verification: Sol3 APS eta on the compact mapping torus
+Target: re-derive eta_APS(Sol3) from LC data + quotient spin structure
+================================================================
+
+  r0 = 3.0
+  Compact quotient convention: M_A = T^2 rtimes_A S^1, A = [[2,1],[1,1]]
+  Spin structures fixed as in Phase5C-04rr2:
+    Sol-P: base periodic, fiber periodic
+    Sol-A: base anti-periodic, fiber periodic
+
+[1] Local Levi-Civita Chern-Simons integrals on Sol3
+----------------------------------------------------------------
+  int_Y Tr(omega dw)        = +0.00000000e+00
+  int_Y (2/3)Tr(omega^3)    = +0.00000000e+00
+  int_Y CS_adj              = +0.00000000e+00   [OK]
+  int_Y CS_sigma            = +0.00000000e+00   [OK]
+  => local spinor-CS density vanishes on Sol3.
+
+[2] Dirac zero-order term in the left-invariant frame
+----------------------------------------------------------------
+  Omega_0 =
+    [[0.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+  Omega_1 =
+    [[0.-0.166667j 0.+0.j      ]
+ [0.+0.j       0.+0.166667j]]
+  Omega_2 =
+    [[ 0.      +0.j -0.166667+0.j]
+ [ 0.166667+0.j  0.      +0.j]]
+  B = sum_c gamma^c Omega_c =
+    [[0.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+  lower-order term cancellation: OK
+  => D_Sol = gamma^a E_a, so constant spinors are harmonic candidates.
+
+[3] Time-reversal symmetry and eta(0)
+----------------------------------------------------------------
+  T gamma_0 T^(-1) =
+    [[ 0.+0.j -1.+0.j]
+ [-1.+0.j  0.+0.j]]   [OK]
+  T gamma_1 T^(-1) =
+    [[0.+0.j 0.+1.j]
+ [0.-1.j 0.+0.j]]   [OK]
+  T gamma_2 T^(-1) =
+    [[-1.+0.j  0.+0.j]
+ [ 0.+0.j  1.+0.j]]   [OK]
+  Since E_a are real differential operators, T D T^(-1) = -D.
+  Therefore the nonzero spectrum is +/- symmetric and eta(0) = 0.
+
+[4] Nonzero fiber Fourier sectors: no zero modes
+----------------------------------------------------------------
+  Exact operator reduction:
+    V (sigma_3 p + i m sigma_1) V^dagger =
+      Matrix([[0, -m + p], [m + p, 0]])
+    expected = Matrix([[0, -m + p], [m + p, 0]])   [OK]
+  For k != 0 the fiber part is a real two-vector p_k(t),
+  so after a local U(1) rotation the zero-mode equation becomes
+      (d/dt +/- m_k(t)) phi = 0,   m_k(t) = ||p_k(t)|| > 0.
+  Hence periodic or anti-periodic solutions are impossible unless k = 0.
+
+           k       min m_k    int_0^1 m_k dt    zero mode?
+      (1, 0)      1.000000          1.481193  NO
+      (0, 1)      0.945742          1.069203  NO
+      (1, 1)      1.414214          2.326450  NO
+      (2, 1)      2.236068          3.747064  NO
+  Representative nonzero sectors confirm the general argument.
+
+[5] k = 0 sector and kernel dimension h
+----------------------------------------------------------------
+  k = 0 sector: D_0 = gamma^3 d/dt, so zero modes are constant spinors.
+  Sol-P: base periodic     -> h = 2
+  Sol-A: base anti-periodic -> h = 0
+
+[6] APS assembly
+----------------------------------------------------------------
+  Sol-P: eta(0) = 0, h = 2, eta_APS = 1.0
+  Sol-A: eta(0) = 0, h = 0, eta_APS = 0.0
+  Note: int_Y CS_sigma = 0 fixes only the local/non-integer part.
+        On Sol-P the integer shift comes from h = 2.
+
+================================================================
+RESULT: PASS
+  eta_APS(Sol-P) = 1
+  eta_APS(Sol-A) = 0
+  => Sol3 APS entry is spin-structure dependent on the compact quotient.
+================================================================

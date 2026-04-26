@@ -1,0 +1,140 @@
+%==============================================================================
+% Section 2: Homogeneous baseline
+%==============================================================================
+\section{Homogeneous Baseline}
+\label{sec:baseline}
+
+This section organises the homogeneous baseline of the four Thurston
+geometries $\Tthree$, $\Nilthree$, $\Sthree$, $\Solthree$ and fixes the
+comparison axis.  The aim is to align the mode language, the baseline
+invariants, and the minimal/activated distinction of each geometry in a common
+convention before the bulk/boundary response dictionaries of the subsequent
+sections are introduced.  The selection rules that appear later are read off
+from the baseline comparison fixed here.
+
+\subsection{Four-Geometry Setup}
+\label{sec:baseline:setup}
+
+All four geometries compared in this paper share the common Euclidean product
+structure $M^3\times\Sone$, but the structure constants of the
+three-dimensional spatial part, the Weyl curvature, the KK splitting pattern,
+and the frame rigidity differ from geometry to geometry.  Even with the same
+minisuperspace variables, the stability of the effective potential, the mass
+splitting of the vector sector, and the activation conditions of the
+Chern--Simons channel therefore vary in a geometry-dependent way.
+
+We first fix the homogeneous sector as a comparison baseline, on top of which
+the first-layer bulk response and the second-layer boundary response are
+stacked.  This makes the words \emph{activated}, \emph{protected}, and
+\emph{minimal} read in subsequent sections not as descriptive labels but as
+clear comparative judgements relative to the homogeneous background.
+
+\subsection{Basic Comparison Table}
+\label{sec:baseline:table}
+
+The current baseline is summarised in the following table.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Indicator & $\Tthree$ & $\Nilthree$ & $\Sthree$ & $\Solthree$ \\
+\midrule
+CS direction count & 0 & 1 & 3 & 0 \\
+KK Higgsing & none & uniaxial & triaxial & biaxial \\
+EC slice minimum & absent & present & absent & present \\
+Maxwell baseline & universal & universal & universal & universal \\
+spin-2 rigidity & non-rigid & non-rigid & non-rigid & rigid \\
+$C^2_\LC$ & $0$ & $4/(3R^4)$ & $0$ & $16/(3R^4)$ \\
+\bottomrule
+\end{tabular}
+\caption{Four-geometry homogeneous baseline.}
+\label{tab:baseline}
+\end{table}
+
+This table conveys two facts simultaneously.  First, $\Nilthree$ and $\Sthree$
+are non-trivial activated geometries with respect to both the CS direction
+count and the Higgsing pattern.  Second, $\Solthree$ is on the minimal side
+in the CS direction count but possesses a non-vanishing Weyl curvature and
+hence an EC slice-minimum branch isomorphic to that of $\Nilthree$.
+Accordingly $\Solthree$ does not belong to the inert class of $\Tthree$; it is
+a CS-inert but spin-0 active rigid geometry.  In the boundary layer this bulk
+distinction is reinforced by the presence or absence of spectral branches
+depending on the compact quotient and the spin structure.
+
+\subsection{Maxwell Universality and the CS Direction-Count Law}
+\label{sec:baseline:maxwell}
+
+The first universal statement in the bulk layer is the geometry-independence
+of the Maxwell coefficient.  Throughout this paper we adopt
+\begin{equation}
+  \KMxw = -\frac{L^2}{2r_0^4}
+\end{equation}
+as the baseline coefficient common to the four geometries.  This universality
+keeps the skeleton of the main dictionary intact under inhomogeneous opening
+and under either reading of the Euclidean circle.  Geometry dependence
+therefore appears not in the Maxwell sector itself but in the CS-active
+direction count, the Higgsing pattern, the EC slice-minimum structure, and
+the defect response.
+
+By contrast, Chern--Simons activation is geometry-dependent and the direction
+count is set by the off-diagonal structure.  Activation occurs along one
+direction in $\Nilthree$ and along three directions in $\Sthree$, while in
+$\Solthree$ a self-referential cancellation forces it to zero.  The
+distinction is decided not by ``whether structure constants exist'' but by
+``whether the correction to $\tilde{F}_{ij}$ has its leg outside the index
+pair $\{i,j\}$''.
+
+The cancellation in $\Solthree$ arises because the underlying structure
+constants form the symmetric pair
+\begin{equation}
+  C^1{}_{01} = +\frac{1}{R}, \qquad
+  C^2{}_{02} = -\frac{1}{R},
+\end{equation}
+so that only same-leg self-coupling corrections remain.  Specifically the
+correction $A_1\to\tilde{F}_{01}$ has its leg $1$ inside $\{0,1\}$ and is thus
+self-referential, whereby the contributions $+1/R$ and $-1/R$ cancel
+algebraically (off-diagonal CS rule, \S\ref{sec:rules:bulk} R2; details in
+Appendix~\ref{app:E:E3}).  In this case the CS channel does not generate any
+new parity-odd direction; only the biaxial Higgsing remains on top of the
+Maxwell baseline.
+
+\subsection{Mode Dictionary and Higgsing Pattern}
+\label{sec:baseline:dict}
+
+Read in the mode language, the differences among the four geometries in the
+homogeneous sector concentrate in three sectors.  In the spin-0 sector, the
+EC slice minimum on the $\eta=V=0$ section appears in $\Nilthree$ and
+$\Solthree$.  Both share the same stationary radius and the same full
+homogeneous Hessian criterion, but the slice potential and the radial Hessian
+of $\Solthree$ are four times those of $\Nilthree$.  $\Tthree$ has a flat
+zero slice and no isolated branch, while round $\Sthree$ has a non-zero
+slope and no stationary point on the slice (verified in
+Appendix~\ref{app:E:E5b}).  In the spin-1 sector the Higgsing pattern is
+classified into none/uniaxial/triaxial/biaxial; this constitutes the principal
+comparison axis of the bulk dictionary.  In the spin-2 sector only
+$\Solthree$ exhibits frame rigidity; the other three geometries belong to the
+non-rigid side.
+
+In particular, the biaxial Higgsing of $\Solthree$ takes the form
+\begin{equation}
+  m^2(A_1) = m^2(A_2) = -\frac{L^2}{2r_0^4}, \qquad m^2(A_0) = 0.
+\end{equation}
+This follows from the modified field strength
+$\tilde{F}_{01} = F_{01} + A_1/R$, which induces a mass term for $A_1$ and
+$A_2$ with the same coefficient as $\KMxw$ (same-leg self-coupling), while
+$A_0$ does not appear in $\tilde{F}$ and remains massless (KK derivation in
+Appendix~\ref{app:E:E2}).  The fact that the two massive directions share the
+same coefficient as the Maxwell baseline shows that $\Solthree$ is a distinct
+geometry: it does not introduce a CS-active direction but carries an EC slice
+branch and a rigid scaffold.
+
+The four Higgsing types ``none/uniaxial/triaxial/biaxial'' are realised
+exactly once each by $\Tthree, \Nilthree, \Sthree, \Solthree$, respectively,
+as can be verified by direct computation of the KK mass matrices
+(Appendix~\ref{app:E:E5}).
+
+The role of this section is therefore to fix the baseline that supplies the
+comparison axis of the response dictionary.  Most technical details---the
+$\Solthree$ structure constants, the CS cancellation, and the frame
+rigidity---are deferred to Appendices~\ref{app:A} and~\ref{app:E}.

@@ -1,0 +1,31 @@
+================================================================
+Verification: KK reduction normalization identity
+Target: Appendix E.11   k_{3D}^{tor-CS} = (1/2) k_{4D}^{NY}
+================================================================
+
+[1] Substitute int C_3^tor = 4 pi^2 * N_top into 4D action
+----------------------------------------------------------------
+  S_eff^(3D) = (k4_NY/(8*pi**2)) * (4 pi^2 * N_top)
+             = N_top*k4_NY/2
+
+[2] Identify the coefficient of N_top with k_{3D}^{tor-CS}
+----------------------------------------------------------------
+  k_{3D}^{tor-CS} = k4_NY/2
+  expected           = k4_NY / 2 = k4_NY/2
+  difference         = 0   [OK]
+
+[3] KK tower (n != 0) parity-odd cancellation
+----------------------------------------------------------------
+  product-circle symmetry: tau -> -tau exchanges n <-> -n
+  real-field condition: tower weights depend only on n^2
+  generic pair: n*w(n**2) + (-n*w(n**2)) = 0
+  -> KK tower contribution to k_{3D}^{tor-CS} = 0   [OK]
+
+[4] r0 independence of the 1/2 factor
+----------------------------------------------------------------
+  4 pi^2 / 8 pi^2 = 1/2   [OK]
+  No r0 dependence in the normalization ratio.
+
+================================================================
+RESULT: PASS  (k_{3D}^{tor-CS} = (1/2) k_{4D}^{NY}, exact)
+================================================================

@@ -1,0 +1,1022 @@
+%==============================================================================
+% Appendix E: Derivations and proof sketches
+%==============================================================================
+\section{Derivations and Proof Sketches}
+\label{app:E}
+
+This appendix collects minimal derivation sketches for statements whose
+results alone are stated in the body and other appendices.  The aim is to
+fix, in a reproducible form, the computations supporting the selection
+rules and observable benchmarks.
+
+Each subsection follows the structure:
+
+\begin{itemize}
+  \item \textbf{Statement}: the assertion in the body.
+  \item \textbf{Derivation}: a self-contained derivation sketch.
+  \item \textbf{Verification}: reference to a stand-alone Python script that
+        performs the equivalent verification (reproducible).
+\end{itemize}
+
+All verification scripts depend only on the DPPU library bundled in
+\texttt{script/dppu/} together with \texttt{sympy}, \texttt{numpy}, and
+\texttt{scipy}.  Each script is run with
+\texttt{python -X utf8 <path>} and judged from its exit code and a final
+\texttt{RESULT: PASS/FAIL} line.
+
+\subsection{$\Solthree$ Structure Constants and Frame Rigidity}
+\label{app:E:E1}
+
+\paragraph{Statement (\S\ref{sec:baseline:maxwell}, \S\ref{sec:bulk:universal}, App.~\ref{app:A}).}
+\begin{equation}
+  C^1{}_{01} = +\frac{1}{R}, \qquad C^2{}_{02} = -\frac{1}{R},
+\end{equation}
+and these are independent of squash / shear deformations (frame rigidity).
+
+\paragraph{Derivation.}
+From the Sol Lie algebra (DPPU convention $[E_b, E_c] = -C^a{}_{bc} E_a$) we
+take the left-invariant coframe
+$\sigma^0 = \dd z$, $\sigma^1 = e^z\,\dd x$, $\sigma^2 = e^{-z}\,\dd y$ and
+compute the exterior derivatives
+\begin{equation}
+  \dd\sigma^0 = 0, \qquad
+  \dd\sigma^1 = \sigma^0\wedge\sigma^1, \qquad
+  \dd\sigma^2 = -\sigma^0\wedge\sigma^2.
+\end{equation}
+For the deformed coframe $e^1 = R f_1\sigma^1$ with the volume-preserving
+deformation $f_1 = (1+\varepsilon)^{2/3}(1+s)$,
+$f_2 = (1+\varepsilon)^{-2/3}/(1+s)$, one has
+\begin{equation}
+  \dd e^1 = R f_1\,\dd\sigma^1
+         = R f_1\,\sigma^0\wedge\sigma^1
+         = \frac{e^0\wedge e^1}{R},
+\end{equation}
+in which $f_1$ cancels exactly; $\dd e^2$ is similar.  Hence the structure
+constants are independent of $\varepsilon, s$.
+
+\paragraph{Verification.}
+\texttt{proofs/sol3\_structure.py}.
+
+\subsection{$\Solthree$ Biaxial Higgsing --- $m^2(A_i)$ from KK Reduction}
+\label{app:E:E2}
+
+\paragraph{Statement (\S\ref{sec:baseline:dict}, \S\ref{sec:bulk:reading}).}
+\begin{equation}
+  m^2(A_0) = 0, \qquad m^2(A_1) = m^2(A_2) = -\frac{L^2}{2 r_0^4} = \KMxw.
+\end{equation}
+
+\paragraph{Derivation.}
+For the KK photon $A_i$ the modified field strength reads
+\begin{equation}
+  \tilde{F}_{01} = F_{01} + C^a{}_{01}A_a = F_{01} + \frac{A_1}{R},
+  \qquad
+  \tilde{F}_{02} = F_{02} - \frac{A_2}{R}.
+\end{equation}
+Substituting into the Maxwell action $-\tfrac{1}{4}\tilde{F}_{ij}\tilde{F}^{ij}$
+and integrating over $\Sone$ yields mass terms for $A_1$ and $A_2$ with the
+same coefficient as $\KMxw$ (same-leg self-coupling).  $A_0$ does not appear
+in $\tilde{F}$ and remains massless.
+
+\paragraph{Verification.}
+\texttt{proofs/kk\_higgsing.py}.
+
+\subsection{Maxwell Universality --- Common Principal Coefficient}
+\label{app:E:E2b}
+
+\paragraph{Statement (\S\ref{sec:baseline:maxwell}, R1).}
+\begin{equation}
+  \KMxw^{\Tthree} = \KMxw^{\Nilthree} = \KMxw^{\Sthree} = \KMxw^{\Solthree}
+  = -\frac{L^2}{2 r_0^4}.
+\end{equation}
+
+\paragraph{Derivation.}
+The geometry-dependent part enters as the structure-constant correction in
+the modified field strength
+\begin{equation}
+  \tilde{F}_{ij} = F_{ij} + C^a{}_{ij}A_a,
+\end{equation}
+but the quadratic Maxwell principal part always comes from the abelian term
+$-\tfrac{1}{4}F_{ij}F^{ij}$.  The geometry-dependent structure constants can
+modify lower-order mass / CS / parity-odd channels, but they do not change
+the coefficient of $F_{ij}F^{ij}$ itself.  Under the common product-circle
+convention and $r_0$ scaling, integration over $\Sone$ fixes the principal
+coefficient to $-L^2/(2 r_0^4)$ in all four geometries.  Maxwell
+universality is therefore not a coincidence of the extractor but a
+consequence of the topology-blindness of the principal symbol.
+
+\paragraph{Verification.}
+\texttt{proofs/kk\_higgsing.py}.
+
+\subsection{$\Solthree$ Chern--Simons Cancellation --- Profile-Local
+Self-Coupling Rule}
+\label{app:E:E3}
+
+\paragraph{Statement (\S\ref{sec:baseline:maxwell}, \S\ref{sec:bulk:universal}, R2).}
+\begin{equation}
+  \mathrm{CS}_{\Solthree} = 0 \quad
+  \text{for profile-local self-couplings}\quad
+  \tilde{F}_{01} = F_{01} + c_{01}(z) A_1,
+  \quad
+  \tilde{F}_{02} = F_{02} + c_{02}(z) A_2.
+\end{equation}
+
+\paragraph{Derivation.}
+The non-abelian cubic correction in $\Solthree$ has two contributions
+proportional to the structure constants $C^1{}_{01} = +1/R$ and
+$C^2{}_{02} = -1/R$.  More generally, even when these are replaced by
+arbitrary scalar coefficients $c_{01}(z), c_{02}(z)$ under profile-local
+opening, the CS channel is activated only when the correction has its leg
+\emph{outside} the index pair $\{i,j\}$ (off-diagonal rule, App.~\ref{app:E:E4}).
+The corrections in $\Solthree$ have the form ``self-referential'' with
+legs inside $\{i,j\}$:
+\begin{equation}
+  A_1\to\tilde{F}_{01}: \text{leg } 1\in\{0,1\},\quad
+  A_2\to\tilde{F}_{02}: \text{leg } 2\in\{0,2\}.
+\end{equation}
+Hence the off-diagonal CS coefficient is zero independently of the values or
+sign relations of $c_{01}, c_{02}$.  The verification script treats
+$c_{01}, c_{02}$ as independent symbols and confirms that, on substituting
+the constant scale and $R_{\mathrm{inv}} = 1/R(z)$ from the current
+$\Solthree$ dictionary as profile-local symbols, the CS coefficient still
+vanishes.  The claim is the profile-local algebraic cancellation of the
+reduced KK extractor; the full inhomogeneous field equation containing
+derivative terms such as $R'(z)$ is not derived here.
+
+\paragraph{Verification.}
+\texttt{proofs/cs\_cancellation.py}.
+
+\subsection{Off-Diagonal CS Rule}
+\label{app:E:E4}
+
+\paragraph{Statement (\S\ref{sec:baseline:maxwell}, R2).}
+A CS channel is activated only when the correction lies outside the leg pair
+$\{i,j\}$ of $\tilde{F}_{ij}$.
+
+\paragraph{Derivation.}
+For KK corrections $\tilde{F}_{ij} = F_{ij} + (\text{coupling}) A_k$, the
+three-point structure expands the CS contribution in terms of
+$\epsilon^{ijk}$.  When $k\in\{i,j\}$ antisymmetry kills $\epsilon^{ijk}$;
+only $k\notin\{i,j\}$ contributes a non-trivial off-diagonal CS direction.
+Classifying the correction types across the four geometries:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllc}
+\toprule
+Type & Example & Correction & CS \\
+\midrule
+no structure constant & $\Tthree$ & --- & 0 \\
+off-diagonal & $\Nilthree$ & $A_2\to\tilde{F}_{01}$ (leg $2\notin\{0,1\}$) & 1 direction \\
+off-diagonal (isotropic) & $\Sthree$ & $\epsilon_{ijk}$-type (all legs off-diagonal) & 3 directions \\
+self-referential & $\Solthree$ & $A_1\to\tilde{F}_{01}$ (leg $1\in\{0,1\}$) & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Classification of correction types and CS activation.}
+\label{tab:appE_offdiag}
+\end{table}
+
+This shows that what determines CS activation is not ``the existence of
+structure constants'' but ``the geometric position of the correction type''.
+
+\paragraph{Verification.}
+\texttt{proofs/cs\_cancellation.py} (off-diagonal count is checked
+structurally).
+
+\subsection{KK Higgsing Four-Type Classification}
+\label{app:E:E5}
+
+\paragraph{Statement (\S\ref{sec:baseline:dict}, R3).}
+The KK Higgsing pattern is classified into the four types
+\texttt{none / uniaxial / triaxial / biaxial}, and is realised exactly once
+each by $\Tthree, \Nilthree, \Sthree, \Solthree$ in this order.
+
+\paragraph{Derivation.}
+Computing the mass matrix $m^2(A_i)$ obtained from KK reduction in parallel
+across the four geometries gives:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{llcc}
+\toprule
+Geometry & Mass dict & Massive count & Type \\
+\midrule
+$\Tthree$ & $\{\}$ & 0 & none \\
+$\Nilthree$ & $\{2: \KMxw\}$ & 1 & uniaxial \\
+$\Sthree$ & $\{0,1,2: -2 L^2/r_0^4\}$ & 3 & triaxial \\
+$\Solthree$ & $\{1, 2: \KMxw\}$ & 2 & biaxial \\
+\bottomrule
+\end{tabular}
+\caption{Massive count for each geometry.}
+\label{tab:appE_higgsing}
+\end{table}
+
+All four types are realised exactly once.
+
+\paragraph{Verification.}
+\texttt{proofs/kk\_higgsing.py}.
+
+\subsection{$\Nilthree / \Solthree$ EC Slice Minima}
+\label{app:E:E5b}
+
+\paragraph{Statement (\S\ref{sec:baseline:dict}, \S\ref{sec:bulk:inventory}, R4).}
+For the homogeneous EC + NY + Weyl potential of the current DPPU library, an
+EC-induced slice minimum on the $\eta = V = 0$ section exists in
+$\Nilthree\times\Sone$ and $\Solthree\times\Sone$ and is absent in
+$\Tthree$ and round $\Sthree$.
+
+The slice potentials of $\Nilthree$ and $\Solthree$ are
+\begin{equation}
+  \Veff^{\Nilthree}(R;\alpha)
+  = \frac{4\pi^4 L R}{\kappa^2} - \frac{64\pi^4 L\alpha}{3 R},
+  \qquad
+  \Veff^{\Solthree}(R;\alpha) = 4\,\Veff^{\Nilthree}(R;\alpha).
+\end{equation}
+The factor of $4$ is consistent with the geometric ratio
+$C^2_\LC(\Solthree) = 4 C^2_\LC(\Nilthree)$
+(App.~\ref{app:E:E7}): the symmetric pair of structure constants
+$C^1{}_{01} = +1/R$, $C^2{}_{02} = -1/R$ in $\Solthree$ produces a Weyl
+curvature four times that of the single $\Nilthree$ structure constant
+$C^2{}_{01} = +1/R$.
+
+For $\alpha < 0$, both share the common stationary radius
+\begin{equation}
+  R_0 = \frac{4\kappa}{\sqrt{3}}\sqrt{-\alpha},
+\end{equation}
+with
+\begin{equation}
+  V_0^{\Nilthree} = \frac{32\sqrt{3}\,\pi^4 L\sqrt{-\alpha}}{3\kappa},
+  \qquad
+  V_0^{\Solthree} = 4\,V_0^{\Nilthree}.
+\end{equation}
+Furthermore, the spin-0 block of the full homogeneous Hessian in both
+geometries shares the determinant
+\begin{equation}
+  \det H_{(\eta, V)}
+  = \frac{262144\,\pi^8 L^2 \alpha^2}{9}\,(1 - \kappa^4\theta_\NY^2).
+\end{equation}
+At the stationary point $R = R_0$, $\eta = V = 0$ the off-diagonal
+components satisfy
+\begin{equation}
+  \partial_R\partial_\eta V|_* = 0, \qquad
+  \partial_R\partial_V V|_* = 0,
+\end{equation}
+so the $3\times 3$ Hessian is block-diagonal as $(R)\oplus(\eta, V)$
+(verified symbolically in\\
+\texttt{paper04/ec\_slice\_minima.py}).  Moreover, the spin-0 block satisfies
+\begin{equation}
+  H_{\eta\eta} + H_{VV} > 0
+  \quad\text{for}\quad
+  |\kappa^2\theta_\NY|\le 1.
+\end{equation}
+Combined with $\det H_{(\eta, V)} > 0$, the spin-0 block is positive
+definite, and together with $H_{RR}^{\Solthree} = 4 H_{RR}^{\Nilthree} > 0$
+the $3\times 3$ Hessian is positive definite.  The EC slice-minimum
+criterion common to $\Nilthree$ and $\Solthree$ is
+\begin{equation}
+  |\kappa^2\theta_\NY| < 1 \Rightarrow \text{local minimum},
+  \quad
+  |\kappa^2\theta_\NY| = 1 \Rightarrow \text{marginal},
+  \quad
+  |\kappa^2\theta_\NY| > 1 \Rightarrow \text{saddle}.
+\end{equation}
+
+\paragraph{Derivation.}
+\texttt{paper04/ec\_slice\_minima.py} computes the slice potential, the
+stationary radius, $V_0$, and the full Hessian directly from the
+\texttt{Mode.MX}, \texttt{NyVariant.FULL} homogeneous potential of the
+current \texttt{dppu} library.  $\Tthree$ has $\Veff|_{\eta=V=0} = 0$ on the
+flat zero slice, with no isolated radial branch, while round $\Sthree$ has
+\begin{equation}
+  \Veff^{\Sthree}(r) = -\frac{24\pi^2 L r}{\kappa^2},
+\end{equation}
+whose non-zero slope precludes a stationary point.  The $\Nilthree$
+criterion agrees with paper~III (EC) \cite{paper3ec} \S5.2 / Theorem~6;
+paper~04 extends the same verification to $\Solthree$ to fix the row of the
+4-geometry inventory.
+
+\paragraph{Verification / source.}
+\texttt{paper04/ec\_slice\_minima.py}.
+
+\subsection{Reduced 1D $\eta$-Mode Defect-Localisation Benchmark}
+\label{app:E:E6}
+
+\paragraph{Statement (\S\ref{sec:bulk:defect}).}
+For the reduced 1D AX-torsion ansatz $\eta = \eta(z)$ on a slice-wise
+homogeneous background, the defect-localisation benchmark is given in
+Sturm--Liouville form
+\begin{equation}
+  \rho(z) = r(z)\quad (\Tthree, \Sthree),\qquad
+  \rho(z) = R(z)\quad (\Nilthree, \Solthree),
+\end{equation}
+\begin{equation}
+  -\frac{\dd}{\dd z}\!\left[K_{\mathrm{geo}}(z)\frac{\dd f}{\dd z}\right]
+  + M_{\mathrm{geo}}(z) f = E f,
+  \qquad
+  K_{\mathrm{geo}}(z) = M_{\mathrm{geo}}(z) = c_{\mathrm{geo}}\rho(z),
+\end{equation}
+with
+\begin{equation}
+  c_{\Tthree} = c_{\Nilthree} = c_{\Solthree} = \frac{96\pi^4 L}{\kappa^2},
+  \qquad
+  c_{\Sthree} = \frac{12\pi^2 L}{\kappa^2}.
+\end{equation}
+At least within the Gaussian $\rho$-dip family, bound states exist
+analytically for all four geometries.
+
+\paragraph{Derivation.}
+The claim is not the rigorous derivation of the full inhomogeneous field
+equation but a reduced 1D defect benchmark restricted to the AX torsion mode.
+The mass side is obtained exactly from the homogeneous engine of the current
+\texttt{dppu} library, while the kinetic side is obtained from the AX
+contortion gradient under a reduced ansatz with $z$-direction opening only.
+
+First, as exact homogeneous data,
+\begin{equation}
+  M_{\mathrm{geo}} = \left.\frac{\partial^2\Veff}{\partial\eta^2}\right|_{\eta=0}
+  = c_{\mathrm{geo}}\rho
+\end{equation}
+follows directly from \texttt{dppu}.  Concretely,
+\begin{equation}
+  M_{\Tthree} = M_{\Nilthree} = M_{\Solthree} = \frac{96\pi^4 L}{\kappa^2}\rho,
+  \qquad
+  M_{\Sthree} = \frac{12\pi^2 L}{\kappa^2}\rho.
+\end{equation}
+
+Next, with the AX torsion ansatz
+\begin{equation}
+  T_{ijk} = \frac{2\eta}{\rho}\,\epsilon_{ijk}
+\end{equation}
+(the coefficient $2/\rho$ follows the DPPU AX convention of paper~III (EC)
+\S3; App.~\ref{app:A:symbols}) and the contortion
+\begin{equation}
+  K_{abc} = \frac{1}{2}(T_{abc} + T_{bca} - T_{cab}),
+\end{equation}
+totally antisymmetric AX torsion gives
+$K_{abc} = \tfrac{1}{2}T_{abc}\propto(\eta/\rho)\epsilon_{abc}$.  In the
+slice-wise homogeneous ansatz $\eta = \eta(z)$, $\rho = \rho(z)$, the
+contraction $K_{abc}K^{abc}$ in the EC action gives the mass term
+$M_{\mathrm{geo}}\eta^2$, while $(\partial_z K_{abc})(\partial_z K^{abc})$
+gives the kinetic term $K_{\mathrm{geo}}(\partial_z\eta)^2$.
+
+For the kinetic part, with $\eta$ alone carrying $z$-dependence and $\rho$
+treated as slice-wise constant in this reduced ansatz,
+\begin{equation}
+  \partial_z K_{abc}\propto\frac{\partial_z\eta}{\rho}\,\epsilon_{abc}.
+\end{equation}
+Self-contraction yields three factors: the index combinatorics
+$\epsilon_{abc}\epsilon^{abc} = 6$, the $\rho$-scaling factor $1/\rho^2$, and
+the volume integral $\mathrm{Vol}_{\mathrm{geo}}(\rho)$.  The gradient part
+is therefore
+\begin{equation}
+  S^{(2)}_{\mathrm{grad}}
+  = \frac{1}{2}\int \dd z\,K_{\mathrm{geo}}(z)\,(\partial_z\eta)^2,
+  \qquad
+  K_{\mathrm{geo}}(z) = \frac{6\,\mathrm{Vol}_{\mathrm{geo}}(\rho)}{\kappa^2 \rho^2}
+\end{equation}
+(verified in \texttt{proofs/eta\_kinetic\_from\_contortion.py} via SymPy).
+Substituting the volume factor for each geometry yields exactly
+\begin{equation}
+  K_{\mathrm{geo}}(z) = c_{\mathrm{geo}}\rho(z) = M_{\mathrm{geo}}(z).
+\end{equation}
+The agreement $K_{\mathrm{geo}} = M_{\mathrm{geo}}$, where the kinetic side
+(contortion gradient) and the mass side
+($\partial^2_\eta\Veff$ from the homogeneous engine) are computed
+independently, is a non-trivial fact.  The current code base therefore
+supports not the ``exact theorem for a general defect channel'' but the
+``agreement between the exact mass datum and the reduced kinetic datum in
+the reduced 1D $\eta$-benchmark''.
+
+For the Gaussian dip
+\begin{equation}
+  \rho(z) = \rho_0(1 - A e^{-z^2/w^2}), \qquad 0 < A < 1,
+\end{equation}
+using the trial function $f_\lambda(z) = e^{-\lambda |z|}$ the Rayleigh
+quotient becomes
+\begin{equation}
+  \frac{E_{\mathrm{var}}(\lambda)}{M_0}
+  = (1+\lambda^2)\!\left[1 - A\lambda w\sqrt{\pi}\,e^{\lambda^2 w^2}\,\mathrm{erfc}(\lambda w)\right],
+  \qquad
+  M_0 = c_{\mathrm{geo}}\rho_0.
+\end{equation}
+For $\lambda\to 0$ this gives
+\begin{equation}
+  \frac{E_{\mathrm{var}}(\lambda)}{M_0}
+  = 1 - A\sqrt{\pi}\,w\lambda + O(\lambda^2) < 1,
+\end{equation}
+so for sufficiently small $\lambda > 0$ at least one bound state exists.
+The coefficient $c_{\mathrm{geo}}$ cancels out of the ratio
+$E_{\mathrm{var}}/M_0$, so the conclusion is common to the four geometries.
+
+A representative numerical scan over $(A, w/\rho_0) = (0.3, 1.0), (0.5, 2.0),
+(0.7, 1.0)$ for all four geometries gives
+\begin{equation}
+  E_{\min} < M_0 = c_{\mathrm{geo}}\rho_0
+\end{equation}
+in all twelve cases (LOCALIZED).
+
+It is important to note that \S\ref{app:E:E6} furnishes only ``kinematic
+localisation''.  The reduced benchmark above implies the common fact that
+a radial dip can produce a bound state, but on its own does not determine
+torsional-charge / parity-odd activation.  CS-active structure is required
+in order to obtain a local parity-odd activated response.  $\Nilthree$
+carries the CS activation of R2 together with the EC slice minimum of R4,
+$\Sthree$ carries the CS activation of R2 together with the
+triplet/nonlinear opening, and $\Solthree$ carries only the EC slice
+minimum of R4 without the CS activation of R2, leading to an
+EC-supported, CS-inert entry; $\Tthree$ carries neither.  The labels
+``trivial / activated'' in the body table therefore record not the existence
+of localisation but how this common $\eta$-benchmark links to the active
+structure of the next stage.
+
+\paragraph{Verification.}
+\texttt{paper04/eta\_defect\_coefficients.py},
+\texttt{paper04/defect\_localization.py}.
+
+\subsection{Background Weyl Scalar $C^2_\LC$}
+\label{app:E:E7}
+
+\paragraph{Statement (\S\ref{sec:boundary:scaffold}, App.~\ref{app:A}).}
+\begin{equation}
+  C^2_\LC(\Tthree) = 0, \quad
+  C^2_\LC(\Nilthree) = \frac{4}{3R^4}, \quad
+  C^2_\LC(\Sthree) = 0, \quad
+  C^2_\LC(\Solthree) = \frac{16}{3R^4}.
+\end{equation}
+
+\paragraph{Derivation.}
+From the left-invariant coframe of each geometry one computes the
+Levi--Civita connection $\omega^a{}_b$ via the Koszul formula and the
+Riemann curvature
+$R^a{}_b = \dd\omega^a{}_b + \omega^a{}_c\wedge\omega^c{}_b$, then extracts
+the Weyl tensor $C_{abcd}$ and evaluates
+$C^2_\LC = C_{abcd}C^{abcd}$.  $\Tthree$ is flat, while $\Sthree$ is
+conformally flat, so $C^2 = 0$.  $\Nilthree$ is of Bianchi II type and
+$\Solthree$ is solv; both have non-zero Weyl values.  The fact that
+$\Solthree$ is \emph{four times} $\Nilthree$ follows geometrically from the
+sign-symmetric pair of structure constants ($\pm 1/R$).
+
+\paragraph{Verification.}
+\texttt{proofs/weyl\_scalar.py}.
+
+\subsection{Distinction of the Three CS 3-Forms}
+\label{app:E:E8}
+
+\paragraph{Statement (\S\ref{sec:boundary:cz}, App.~\ref{app:A}).}
+The 3-forms used in this paper are
+\begin{itemize}
+  \item $\Ctor = e_a\wedge T^a$ (torsion-CS, EC connection);
+  \item $\Csig = \Tr_\sigma(\omega\wedge \dd\omega + \tfrac{2}{3}\omega^3)$
+        (spinor CS, LC, APS final);
+  \item $\Cadj = \Tr_{\mathrm{adj}}(\omega\wedge \dd\omega + \tfrac{2}{3}\omega^3)$
+        (adjoint CS, LC, APS intermediate).
+\end{itemize}
+The CZ inflow uses $\Ctor$, while the APS spectral entry uses $\Csig$.
+
+\paragraph{Derivation.}
+$\Ctor$ is a primitive of Nieh--Yan:
+$\dd\Ctor = T^a\wedge T_a + R_{ab}\wedge e^a\wedge e^b = \mathrm{NY}$.  By
+Stokes, $\int_{X^4}\mathrm{NY} = \int_Y\Ctor$ supplies the boundary inflow.
+$\Csig$ and $\Cadj$ are functionals of the Levi--Civita connection alone,
+appearing in the geometric part of the APS index theorem (i.e.\ the
+$\eta(0)$ computation).  However the relation between the two is not
+simply ``factor of two by trace normalisation''.  On the $\Nilthree$
+benchmark the quadratic trace ratio is $1$ but the cubic trace ratio is
+$-2$, and the APS final sign carries the orientation convention
+$\etaAPS = -\int_Y \Csig$.  The correspondence between $\Csig$ and $\Cadj$
+therefore depends on representation and convention; this paper distinguishes
+them based on the explicit computation in \S\ref{app:E:E10}.
+
+Hence $\etaAPS$ (spectral) and $\Ntop$ (frame-bundle-normalised torsional
+charge), although both ``parity-odd boundary quantities'', belong to
+different 3-form sectors and are not amenable to direct subtraction.
+
+\paragraph{Verification.}
+This subsection is purely classificatory (algebraic trace structure) and
+requires no script.  Structural definitions of the 3-forms are recalled in
+\S\ref{sec:boundary:cz} and App.~\ref{app:A:3forms}.
+
+\subsection{$\Ntop = 6 r_0^2$ for $\Sthree$ (Frame-Bundle-Normalised
+Torsional Charge)}
+\label{app:E:E9}
+
+\paragraph{Statement (\S\ref{sec:boundary:inventory}, B3).}
+\begin{equation}
+  \Ntop(\Sthree) = \frac{1}{4\pi^2}\int_{\Sthree}\Ctor = 6 r_0^2.
+\end{equation}
+
+\paragraph{Derivation.}
+The derivation splits into two stages.  As the geometric part, from the
+left-invariant structure constants of round $\Sthree$,
+\begin{equation}
+  C^i{}_{jk} = \frac{4}{r_0}\,\epsilon^i{}_{jk},
+\end{equation}
+the torsion 2-form is
+\begin{equation}
+  T^i = \frac{1}{2}C^i{}_{jk}\,e^j\wedge e^k,
+\end{equation}
+and
+\begin{equation}
+  \Ctor = e_i\wedge T^i
+        = \frac{1}{2}C^i{}_{jk}\,e_i\wedge e^j\wedge e^k
+        = \frac{12}{r_0}\,\mathrm{vol}_{\Sthree}.
+\end{equation}
+Using $\mathrm{Vol}(\Sthree) = 2\pi^2 r_0^3$,
+\begin{equation}
+  \int_{\Sthree}\Ctor = \frac{12}{r_0}\cdot 2\pi^2 r_0^3 = 24\pi^2 r_0^2.
+\end{equation}
+The topological-normalisation part takes the Chern-class unit on the frame
+bundle $\pi_3(SO(3)) = \mathbb{Z}$ in the vector / frame convention
+$T_R = 1$, fixing the normalisation to $1/(4\pi^2)$ ($8\pi^2$ corresponds to
+the adjoint $T_R = 2$).  Hence
+\begin{equation}
+  \Ntop = \frac{24\pi^2 r_0^2}{4\pi^2} = 6 r_0^2.
+\end{equation}
+This paper adopts the vector / frame trace convention $T_R = 1$, which
+matches the Pontryagin class on the frame bundle to the $1/(8\pi^2)$
+normalisation of the 4D Nieh--Yan action (\S\ref{app:E:E11}); under the
+adjoint convention $T_R = 2$ the 3D normalisation also becomes
+$1/(8\pi^2)$.  We use the single $T_R = 1$ chain throughout.
+
+Since this paper imposes no extra quantisation condition on $r_0$, what we
+obtain is the value of the frame-bundle-normalised torsional charge
+$\Ntop = 6 r_0^2$.  At the benchmark choice $r_0 = 3$ this gives
+$\Ntop = 54$, but integrality for general continuous $r_0$ requires a
+separate geometric quantisation condition.
+
+\paragraph{Verification.}
+\texttt{paper04/torsional\_charge.py}.
+
+\subsection{$\etaAPS(\Nilthree) = +1/2$ (Local APS Spectral Core)}
+\label{app:E:E10}
+
+\paragraph{Statement (\S\ref{sec:boundary:inventory}, B2).}
+\begin{equation}
+  \etaAPS(\Nilthree) = +\frac{1}{2}.
+\end{equation}
+
+\paragraph{Derivation.}
+The derivation splits into ``confirmation of the low Landau-level
+structure'' and ``determination of the value from the CS integral''.
+Decomposing the Levi--Civita Dirac operator on $\Nilthree$ in the PPA spin
+structure $(\epsilon_0, \epsilon_1, \epsilon_2) = (+,+,-)$ via the
+Heisenberg mode decomposition, the condition $p_2\in\mathbb{Z}+1/2$
+excludes the $p_2 = 0$ sector, and for each $p_2$ one obtains
+\begin{equation}
+  \mu_n^+ = 2 n\omega|k_2| + k_2^2,
+  \quad
+  \mu_n^- = 2(n+1)\omega|k_2| + k_2^2,
+  \quad
+  \omega = |k_2|/r_0.
+\end{equation}
+This eigenvalue formula follows directly from the Heisenberg group
+structure $[E_0, E_1] = (1/r_0) E_2$ of $\Nilthree$.  Fixing each $p_2$
+Fourier mode, $(E_0, E_1)$ generate ladder operators $a, a^\dagger$
+following the Heisenberg algebra, and the Levi--Civita Dirac operator can
+be written as
+\begin{equation}
+  D = \gamma^0 E_0 + \gamma^1 E_1 + i p_2\gamma^2 + (\text{spin connection}).
+\end{equation}
+Diagonalising $D^\dagger D$ in the ladder basis, the Landau-level structure
+$\mu_n = 2n\omega|k_2| + k_2^2$, $\omega = |k_2|/r_0$ emerges in closed form
+in each $p_2$ sector.  The pair $\mu_n^\pm$ arises from the different
+zero-point shifts of spin up/down (verified symbolically by the
+ladder construction in
+\texttt{proofs/landau\_levels\_nil3.py}).  We use only the closed form within
+each Heisenberg-decomposed sector; the spectral theorem on the full compact
+quotient $\Gamma\backslash\Nilthree$ is a separate problem.  Hence the
+$n=0$ spin-up branch is the unique source of the spectral asymmetry and
+the kernel under PPA is
+\begin{equation}
+  h = \dim\ker D = 0.
+\end{equation}
+
+The value itself is fixed by constructing the Levi--Civita connection
+$\omega^{ab}$ from the structure constant $C^2{}_{01} = +1/r_0$ of
+$\Nilthree$ and combining it with the adjoint generators $J_{ab}$ and the
+spinor generators $\sigma_{ab} = [\gamma_a, \gamma_b]/2$ to evaluate the
+Chern--Simons 3-form.  Concretely, on the $\Nilthree$ benchmark $r_0 = 3$,
+\begin{equation}
+  \int_Y \Tr_{\mathrm{adj}}(\omega\wedge \dd\omega) = -\frac{1}{4},
+  \qquad
+  \int_Y \frac{2}{3}\Tr_{\mathrm{adj}}(\omega^3) = +\frac{1}{2},
+\end{equation}
+yielding
+\begin{equation}
+  \int_Y \Cadj = +\frac{1}{4}.
+\end{equation}
+This intermediate value is reproduced in
+\texttt{paper04/eta\_aps\_nil3.py}.  On the spinor side the quadratic trace
+ratio is $1$ but the cubic trace ratio is
+\begin{equation}
+  \frac{\Tr_\sigma(A^3)}{\Tr_{\mathrm{adj}}(A^3)} = -2,
+\end{equation}
+so
+\begin{equation}
+  \int_Y \Csig = -\frac{1}{2}.
+\end{equation}
+Under the DPPU orientation convention
+\begin{equation}
+  \etaAPS = -\int_Y \Csig.
+\end{equation}
+The cubic ratio can be confirmed directly with explicit generators.  In the
+3D Euclidean gamma algebra,
+\begin{equation}
+  \sigma_{ab} = \frac{1}{2}[\gamma_a, \gamma_b] = i\epsilon_{ab}{}^c \gamma_c,
+\end{equation}
+so for the spinor basis $T_i = i\gamma_i$,
+\begin{equation}
+  \Tr_\sigma(T_i T_j T_k) = 2\,\epsilon_{ijk},
+\end{equation}
+while for the adjoint basis $J_i$,
+\begin{equation}
+  \Tr_{\mathrm{adj}}(J_i J_j J_k) = -\,\epsilon_{ijk}.
+\end{equation}
+Substituting the same connection coefficients
+$A = a^i T_i\leftrightarrow a^i J_i$,
+\begin{equation}
+  \frac{\Tr_\sigma(A^3)}{\Tr_{\mathrm{adj}}(A^3)} = -2.
+\end{equation}
+
+Therefore
+\begin{equation}
+  \etaAPS(\Nilthree) = +\frac{1}{2},
+\end{equation}
+and the APS formula gives
+\begin{equation}
+  \eta(0) = 2\etaAPS - h = 1.
+\end{equation}
+The Landau-level analysis fixes ``which branch carries the asymmetry'' and
+``$h = 0$ in PPA''; the value is fixed by the Levi--Civita CS integral and
+the spinor / adjoint cubic trace ratio.
+
+The EC correction $\delta = -\kappa_{\mathrm{tor}}/(4 r_0)$ is a uniform
+shift only and produces no zero crossing in the standard parameter range,
+so $\eta^{\EC}(0) = \eta^{\LC}(0)$.
+
+As benchmarks, the PPA spin structure on $\Tthree$ and the Levi--Civita
+Dirac on round $\Sthree$ both have eigenvalues exactly paired under
+$\lambda\leftrightarrow -\lambda$ with $h = 0$, so $\etaAPS = 0$.  In
+$\Solthree$, by contrast, the local CS integral itself vanishes but a
+global spectral branch dependent on the compact quotient and spin structure
+may arise.  This is made explicit in the next subsection as a benchmark.
+
+\paragraph{Verification.}
+The strict $\Nilthree$ value: \texttt{paper04/eta\_aps\_nil3.py}.
+The $\Tthree / \Sthree$ benchmark zero:
+\texttt{proofs/aps\_zero\_t3\_s3.py}.
+
+\subsection{$\etaAPS(\Solthree)$ on the Compact Mapping-Torus Benchmark}
+\label{app:E:E10b}
+
+\paragraph{Statement (\S\ref{sec:boundary:inventory}, B4).}
+On the compact $\Solthree$ benchmark
+\begin{equation}
+  M_A = T^2\rtimes_A \Sone, \qquad
+  A = \begin{pmatrix}2 & 1 \\ 1 & 1\end{pmatrix},
+\end{equation}
+together with the two benchmark spin structures Sol-P / Sol-A tracked
+within DPPU,
+\begin{equation}
+  \etaAPS(\text{Sol-P}) = 1, \qquad
+  \etaAPS(\text{Sol-A}) = 0.
+\end{equation}
+``Sol-P'' is base periodic / fibre periodic, ``Sol-A'' is base anti-periodic
+/ fibre periodic.  This is not a universal $\Solthree$ value but a global
+spectral branch that depends on this compact quotient and spin-structure
+choice.
+
+\paragraph{Derivation.}
+From the structure constants
+\begin{equation}
+  C^1{}_{01} = +\frac{1}{r_0}, \qquad
+  C^2{}_{02} = -\frac{1}{r_0}
+\end{equation}
+of $\Solthree$ one constructs the Levi--Civita connection.  Both adjoint and
+spinor Chern--Simons 3-forms then satisfy
+\begin{equation}
+  \int_Y\Cadj = 0, \qquad \int_Y\Csig = 0,
+\end{equation}
+so the local CS integral alone does not fix the APS value in $\Solthree$.
+
+In a left-invariant orthonormal frame the zero-order spin connection of the
+Dirac operator cancels exactly, leaving
+\begin{equation}
+  D_{\mathrm{Sol}} = \gamma^a E_a.
+\end{equation}
+Decomposing on the mapping torus by fibre Fourier mode $k\in\Lambda^*$, the
+zero-mode equation in the $k\neq 0$ sector reduces locally, by a $U(1)$
+rotation, to
+\begin{equation}
+  (\partial_t \pm m_k(t))\phi = 0, \qquad m_k(t) > 0,
+\end{equation}
+so for either periodic or anti-periodic boundary condition along the base
+no zero modes arise from $k\neq 0$.
+
+In the remaining $k = 0$ sector only constant spinors are candidates.  In
+Sol-P (base periodic) the two constant spinors descend to the quotient,
+giving
+\begin{equation}
+  h(\text{Sol-P}) = 2,
+\end{equation}
+while in Sol-A (base anti-periodic) they do not descend, giving
+\begin{equation}
+  h(\text{Sol-A}) = 0.
+\end{equation}
+The value $h = 2$ in Sol-P refers to the standard $\mathrm{Spin}(2)$ lift of
+the monodromy
+$A = \left(\begin{smallmatrix}2 & 1 \\ 1 & 1\end{smallmatrix}\right)\in SL(2,\mathbb{Z})$
+(the benchmark choice inherited by DPPU from paper~III (EC)).  $A$ admits
+two spin lifts; another lift can give $h(\text{Sol-P}) = 0$.  The Sol-P /
+Sol-A values here are compact mapping-torus values fixed under this
+benchmark spin lift, not universal spectral entries of $\Solthree$.
+
+Setting
+\begin{equation}
+  T = i\sigma_2 K
+\end{equation}
+gives $T\sigma_j T^{-1} = -\sigma_j$, and since $E_a$ are real vector fields
+$T D T^{-1} = -D$.  $T$ is antiunitary, so for $D\psi = \lambda\psi$
+($\lambda\in\mathbb{R}$) one has $D(T\psi) = -\lambda(T\psi)$: the non-zero
+spectrum is paired by $\lambda\leftrightarrow -\lambda$.  Hence the
+antilinear time-reversal symmetry yields $\eta(0) = 0$ for both spin
+structures.  By the APS definition
+\begin{equation}
+  \etaAPS = \frac{\eta(0) + h}{2}
+\end{equation}
+we therefore obtain
+\begin{equation}
+  \etaAPS(\text{Sol-P}) = 1, \qquad
+  \etaAPS(\text{Sol-A}) = 0.
+\end{equation}
+
+The spectral entry of $\Solthree$ in the present benchmark is therefore not
+a local Levi--Civita CS core (as in $\Nilthree$) but a global kernel branch
+supported by the compact quotient / spin structure.  More general
+hyperbolic monodromy quotients can change this global branch further; in
+this paper we adopt the $M_A$ benchmark as the reference.
+
+\paragraph{Verification.}
+\texttt{proofs/eta\_aps\_sol3.py}.
+
+\subsection{KK Reduction Normalisation Identity}
+\label{app:E:E11}
+
+\paragraph{Statement (\S\ref{sec:circle:kk}, App.~\ref{app:D:consistency}).}
+\begin{equation}
+  k_{3D}^{\mathrm{tor\text{-}CS}} = \frac{1}{2}\,k_{4D}^{\NY}.
+\end{equation}
+
+\paragraph{Derivation.}
+Write the DPPU 4D NY action with an independent symbol $k_{4D}^{\NY}$:
+\begin{equation}
+  S_\NY^{(4D)} = \frac{k_{4D}^{\NY}}{8\pi^2}\int_{X^4}\mathrm{NY}.
+\end{equation}
+Applying the CZ identity $\mathrm{NY} = \dd\Ctor$ together with Stokes'
+theorem on $X^4 = M^3\times[0,\beta]$ gives
+\begin{equation}
+  \int_{X^4}\mathrm{NY} = \int_Y \Ctor = 4\pi^2\cdot \Ntop
+\end{equation}
+(the last equality is the normalisation of \S\ref{app:E:E9}).
+Substituting,
+\begin{equation}
+  S_{\mathrm{eff}}^{(3D)}\supset
+  \frac{k_{4D}^{\NY}}{8\pi^2}\cdot 4\pi^2\cdot\Ntop
+  = \frac{k_{4D}^{\NY}}{2}\cdot\Ntop.
+\end{equation}
+The coefficient on the normalised basis
+\begin{equation}
+  \Ntop := \frac{1}{4\pi^2}\int_Y \Ctor
+\end{equation}
+is identified with the 3D torsion-CS coefficient, giving
+\begin{equation}
+  k_{3D}^{\mathrm{tor\text{-}CS}} = \frac{k_{4D}^{\NY}}{2}.
+\end{equation}
+The factor $1/2$ comes from $4\pi^2/8\pi^2$ and is independent of $r_0$.
+Here $\Ntop$ is used as the basis of the frame-bundle-normalised torsional
+charge; this paper does not assume integrality for general continuous
+$r_0$.  Furthermore, on an untwisted product circle the real bosonic KK
+decomposition has Fourier modes $n$ and $-n$ as complex-conjugate pairs;
+masses and even weights are determined by $n^2$ alone.  The reflection
+$\tau\mapsto -\tau$ on the circle simply swaps these two modes while
+preserving the 4D kinetic operator, so the parity-odd residue takes the
+form $n\,w(n^2)$ in general, and the contribution of the KK tower
+($n\neq 0$) cancels strictly in pairs.
+
+\paragraph{Verification.}
+\texttt{proofs/kk\_normalization.py}.
+
+\subsection{Normalisation-Free Quotient $Q_{\mathrm{best}} = \eta(0)/\Delta k_{\mathrm{matter}} = 1$}
+\label{app:E:E12}
+
+\paragraph{Statement (\S\ref{sec:circle:kk}, App.~\ref{app:D:consistency}).}
+\begin{equation}
+  Q_{\mathrm{best}} := \frac{\eta(0)}{\Delta k_{\mathrm{matter}}} = 1.
+\end{equation}
+
+\paragraph{Derivation.}
+The numerator $\eta(0)^{(3D)} = 1$ follows from \S\ref{app:E:E10}.  The
+denominator $\Delta k_{\mathrm{matter}} = h_{\mathrm{rep}}/2 = 1$ comes from
+the Redlich parity shift \cite{Redlich1984} with representation dimension
+$h_{\mathrm{rep}} = 2$ (DPPU minimal matter assumption); it is
+theory-derived.  Both are \emph{doubly normalisation-free}:
+\begin{itemize}
+  \item the numerator is a spectral invariant that does not pass through
+        the 4D APS bridge;
+  \item the denominator depends only on $h_{\mathrm{rep}}$ and does not pass
+        through the KK normalisation.
+\end{itemize}
+Hence the quotient $Q_{\mathrm{best}}$ is a strict invariant independent of
+normalisation conventions.
+
+\paragraph{Note.}
+$h_{\mathrm{rep}} = 2$ corresponds to the minimal two-component matter
+convention used since paper~III (EC) and supplies the
+standard unit of the Redlich parity shift in lower-dimensional language.
+The identification of $Q_{\mathrm{best}} = 1$ with $k_q = 1$ requires a
+separate identification step (the spectral $\leftrightarrow$ CS-level
+dictionary in the DPPU APS convention) which lies outside the scope
+of this appendix.
+
+\paragraph{Verification.}
+This subsection is the algebraic identity obtained by substituting
+$\eta(0) = 1$ from \S\ref{app:E:E10} and $\Delta k_{\mathrm{matter}} = 1$
+from $h_{\mathrm{rep}} = 2$.
+
+\subsection{CS-Level Integrality $k_q\in\mathbb{Z}$ (Single-Valuedness)}
+\label{app:E:E13}
+
+\paragraph{Statement (\S\ref{sec:circle:kk}, App.~\ref{app:D:consistency}).}
+\begin{equation}
+  k_q\in\mathbb{Z}\quad
+  [\text{from single-valuedness of } e^{i S_{\mathrm{odd}}}].
+\end{equation}
+
+\paragraph{Derivation.}
+Write the parity-odd effective action on the 3D boundary $Y = M^3$ as
+$S_{\mathrm{odd}}^{(3D)} = k_q\cdot W[A/\omega]$.  Here $W$ is a parity-odd
+functional, normalised so that the unit winding under a large frame
+rotation (frame bundle $\pi_3(SO(3)) = \mathbb{Z}$) gives $\Delta W = 1$.
+In the $2\pi$-normalised formulation,
+\begin{equation}
+  S_{\mathrm{odd}}^{(3D)} = k_q\cdot(2\pi\cdot W),\qquad
+  \Delta W|_{n=1} = 1,
+\end{equation}
+so the unit winding shift is $\Delta S_{\mathrm{odd}}|_{n=1} = 2\pi k_q$.
+Single-valuedness of the path-integral measure
+$e^{i\Delta S_{\mathrm{odd}}} = 1$ then gives
+\begin{equation}
+  e^{2\pi i k_q} = 1 \iff k_q\in\mathbb{Z}.
+\end{equation}
+
+\paragraph{Note.}
+The homotopy input $\pi_3(SO(3)) = \mathbb{Z}$ used here is the same
+frame-bundle datum as in the normalisation of \S\ref{app:E:E9}; it
+corresponds to the large-rotation version of standard 3D Chern--Simons
+quantisation.  The correspondence with the DPPU native $\theta_\NY$
+normalisation is not fixed here, and $k_q\in\mathbb{Z}$ itself is a formal
+statement.
+
+\paragraph{Verification.}
+This subsection is a formal argument based on the single-valuedness of the
+path-integral measure and requires no additional numerical verification.
+
+\subsection{Summary Table}
+\label{app:E:summary}
+
+\small
+\begingroup
+\renewcommand{\arraystretch}{2.0}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+
+\begin{longtable}{L{4.8cm}L{2.5cm}L{4.2cm}L{3.0cm}}
+\toprule
+Statement & Body location & Verification & Status \\
+\midrule
+\endfirsthead
+
+\toprule
+Statement & Body location & Verification & Status \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{\small(continued on next page)}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+$\Solthree$ structure constants + frame rigidity &
+  \S\ref{sec:baseline:maxwell}, App.~\ref{app:A} &
+  \code{proofs/sol3_structure.py} &
+  exact (SymPy) \\
+
+$\Solthree$ rigidity: $\partial^2_{\varepsilon,s}V=0$ at $\varepsilon=s=0$ &
+  \S\ref{sec:boundary:scaffold}, \S\ref{app:E:E1} &
+  \code{proofs/sol3_structure.py} &
+  direct Hessian check \\
+
+$\Solthree$ biaxial Higgsing $m^2(A_i)$ &
+  \S\ref{sec:baseline:dict}, \S\ref{sec:bulk:reading} &
+  \code{proofs/kk_higgsing.py} &
+  exact (KK extractor) \\
+
+$\Solthree$ CS = 0 cancellation &
+  \S\ref{sec:baseline:maxwell}, \S\ref{sec:bulk:universal} &
+  \code{proofs/cs_cancellation.py} &
+  exact within profile-local KK ansatz \\
+
+Maxwell universality $\KMxw$ &
+  \S\ref{sec:baseline:maxwell}, R1 &
+  \code{proofs/kk_higgsing.py} &
+  common principal coefficient \\
+
+Off-diagonal CS rule (R2) &
+  \S\ref{sec:rules:bulk} &
+  \code{proofs/cs_cancellation.py} &
+  classification \\
+
+4-type Higgsing one-to-one &
+  R3 &
+  \code{proofs/kk_higgsing.py} &
+  exhaustive \\
+
+EC slice minima: $\Nilthree$/$\Solthree$ present; $\Tthree$/$\Sthree$ absent &
+  \S\ref{sec:baseline:dict}, \S\ref{sec:bulk:inventory}, R4 &
+  \code{paper04/ec_slice_minima.py} &
+  exact homogeneous Hessian criterion \\
+
+$K_{\mathrm{geo}}$ from AX contortion gradient &
+  \S\ref{app:E:E6} &
+  \code{proofs/eta_kinetic_from_contortion.py} &
+  independent mass/kinetic derivation \\
+
+reduced 1D $\eta$-benchmark:
+$K_{\mathrm{geo}}=M_{\mathrm{geo}}=c_{\mathrm{geo}}\rho(z)$ &
+  \S\ref{sec:bulk:defect} &
+  \code{paper04/eta_defect_coefficients.py};
+  \code{paper04/defect_localization.py} &
+  exact (4 geom.); variational + numerical
+  (12/12 LOCALIZED) \\
+
+$C^2_\LC$ (4 geometries) &
+  \S\ref{sec:boundary:scaffold}, App.~\ref{app:A} &
+  \code{proofs/weyl_scalar.py} &
+  exact (SymPy) \\
+
+3-form distinction &
+  \S\ref{sec:boundary:cz}, App.~\ref{app:A} &
+  algebraic; no script &
+  classification \\
+
+$\Ntop(\Sthree) = 6 r_0^2$ &
+  \S\ref{sec:boundary:inventory} &
+  \code{paper04/torsional_charge.py} &
+  geometry-derived + frame-bundle normalisation \\
+
+$\etaAPS(\Tthree) = \etaAPS(\Sthree) = 0$ &
+  \S\ref{sec:boundary:inventory}, \S\ref{sec:rules:boundary} &
+  \code{proofs/aps_zero_t3_s3.py} &
+  exact benchmark; symmetric LC spectra \\
+
+$\etaAPS(\Nilthree) = +1/2$ &
+  \S\ref{sec:boundary:inventory} &
+  \code{paper04/eta_aps_nil3.py} &
+  local LC CS + spinor trace derivation \\
+
+Heisenberg Landau levels for $\Nilthree$ Dirac &
+  \S\ref{app:E:E10} &
+  \code{proofs/landau_levels_nil3.py} &
+  symbolic ladder construction \\
+
+$\etaAPS(\text{Sol-P / Sol-A}) = 1/0$ &
+  \S\ref{sec:boundary:inventory}, \S\ref{sec:rules:boundary} &
+  \code{proofs/eta_aps_sol3.py} &
+  global / kernel-sourced compact benchmark \\
+
+$k_{3D}^{\mathrm{tor\text{-}CS}} = k_{4D}^{\NY}/2$ &
+  \S\ref{sec:circle:kk} &
+  \code{proofs/kk_normalization.py} &
+  strict (CZ + Stokes) \\
+
+$Q_{\mathrm{best}} = 1$ &
+  \S\ref{sec:circle:kk} &
+  algebraic; \S\ref{app:E:E10} + Redlich &
+  strict; normalisation-free \\
+
+$k_q\in\mathbb{Z}$ &
+  \S\ref{sec:circle:kk} &
+  formal; single-valuedness &
+  formal \\
+
+\caption{Summary of derivations and verifications.}
+\end{longtable}
+
+\endgroup
+\label{tab:appE_summary}
+
+All verification scripts are placed in
+\texttt{scripts/proofs/} or \texttt{scripts/paper04/}, and
+are self-contained, depending only on the \texttt{dppu/} library
+bundled with the paper.

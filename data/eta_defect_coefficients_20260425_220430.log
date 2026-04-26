@@ -1,0 +1,48 @@
+========================================================================
+Verification: eta-mode reduced defect coefficients
+Target: Appendix E.6
+========================================================================
+
+  Benchmark assumptions:
+    - AX torsion mode
+    - slice-wise homogeneous background
+    - reduced 1D ansatz eta = eta(z)
+    - kinetic datum from contortion gradient
+
+------------------------------------------------------------------------
+  Topology: T3
+    volume      = 16*pi**4*L*r**3
+    M_geo       = 96*pi**4*L*r/kappa**2
+    K_geo(red.) = 96*pi**4*L*r/kappa**2
+    expected    = 96*pi**4*L*r/kappa**2
+    M_geo == expected ? YES
+    K_geo == M_geo  ? YES
+------------------------------------------------------------------------
+  Topology: Nil3
+    volume      = 16*pi**4*L*R**3
+    M_geo       = 96*pi**4*L*R/kappa**2
+    K_geo(red.) = 96*pi**4*L*R/kappa**2
+    expected    = 96*pi**4*L*R/kappa**2
+    M_geo == expected ? YES
+    K_geo == M_geo  ? YES
+------------------------------------------------------------------------
+  Topology: S3
+    volume      = 2*pi**2*L*r**3
+    M_geo       = 12*pi**2*L*r/kappa**2
+    K_geo(red.) = 12*pi**2*L*r/kappa**2
+    expected    = 12*pi**2*L*r/kappa**2
+    M_geo == expected ? YES
+    K_geo == M_geo  ? YES
+------------------------------------------------------------------------
+  Topology: Sol3
+    volume      = 16*pi**4*L*R**3
+    M_geo       = 96*pi**4*L*R/kappa**2
+    K_geo(red.) = 96*pi**4*L*R/kappa**2
+    expected    = 96*pi**4*L*R/kappa**2
+    M_geo == expected ? YES
+    K_geo == M_geo  ? YES
+------------------------------------------------------------------------
+
+========================================================================
+RESULT: PASS  (4 geometries: exact eta-mass datum matches reduced K_geo)
+========================================================================

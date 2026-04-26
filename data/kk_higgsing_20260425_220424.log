@@ -1,0 +1,29 @@
+================================================================
+Verification: KK Higgsing four-type classification
+Target: Appendix E.2 and E.5
+================================================================
+
+  Universal Maxwell baseline expected: K_Mxw = -L**2/(2*r0**4)
+
+----------------------------------------------------------------
+  geo    pattern     massive       CS    Maxwell     
+----------------------------------------------------------------
+  T3     none        []            0     -L**2/(2*r0**4)  [OK]
+         A_KK/K^2 = 0   expected 0   [OK]
+  Nil3   uniaxial    [2]           0     -L**2/(2*r0**4)  [OK]
+         A_KK/K^2 = 2/3   expected 2/3   [OK]
+  S3     triaxial    [0, 1, 2]     !=0   -L**2/(2*r0**4)  [OK]
+         A_KK/K^2 = 0   expected 0   [OK]
+  Sol3   biaxial     [1, 2]        0     -L**2/(2*r0**4)  [OK]
+         A_KK/K^2 = 2/3   expected 2/3   [OK]
+
+  [Sol3 mass dict detail (E.2)]
+    m^2(A_0) = 0   expected 0   [OK]
+    m^2(A_1) = -L**2/(2*r0**4)   expected -L**2/(2*r0**4)   [OK]
+    m^2(A_2) = -L**2/(2*r0**4)   expected -L**2/(2*r0**4)   [OK]
+
+----------------------------------------------------------------
+
+================================================================
+RESULT: PASS  (Maxwell universal; 4-type Higgsing and A_KK exact)
+================================================================

@@ -1,0 +1,59 @@
+========================================================================
+Verification: EC slice minima across T3 / Nil3 / S3 / Sol3
+Target: paper04 Appendix E.5b
+========================================================================
+
+[1] eta=V=0 slice potentials
+------------------------------------------------------------------------
+  T3    V_slice = 0
+        dV/drho = 0
+        stationary solutions = []
+  Nil3  V_slice = (12*pi**4*L*R**2 - 64*pi**4*L*alpha*kappa**2)/(3*R*kappa**2)
+        dV/drho = (12*pi**4*L*R**2 + 64*pi**4*L*alpha*kappa**2)/(3*R**2*kappa**2)
+        stationary solutions = [4*sqrt(3)*kappa*sqrt(-alpha)/3]
+  S3    V_slice = -24*pi**2*L*r/kappa**2
+        dV/drho = -24*pi**2*L/kappa**2
+        stationary solutions = []
+  Sol3  V_slice = (48*pi**4*L*R**2 - 256*pi**4*L*alpha*kappa**2)/(3*R*kappa**2)
+        dV/drho = (48*pi**4*L*R**2 + 256*pi**4*L*alpha*kappa**2)/(3*R**2*kappa**2)
+        stationary solutions = [4*sqrt(3)*kappa*sqrt(-alpha)/3]
+
+[2] Nil3 and Sol3 branch formulae
+------------------------------------------------------------------------
+  Nil3:
+    V_slice                    = (12*pi**4*L*R**2 - 64*pi**4*L*alpha*kappa**2)/(3*R*kappa**2)
+    R0                         = 4*sqrt(3)*kappa*sqrt(-alpha)/3
+    V0                         = 32*sqrt(3)*pi**4*L*sqrt(-alpha)/(3*kappa)
+    H_RR                       = 2*sqrt(3)*pi**4*L/(kappa**3*sqrt(-alpha))
+    H_Reta, H_RV               = 0, 0   [PASS]
+    tr H_(eta,V)               = 128*sqrt(3)*pi**4*L*sqrt(-alpha)*(-16*alpha*kappa**2 + 27)/(27*kappa)   [PASS]
+    det H_(eta,V)              = -262144*pi**8*L**2*alpha**2*(kappa**2*theta_NY - 1)*(kappa**2*theta_NY + 1)/9
+    slice/R0/V0/H_RR/det check = PASS
+    block-diagonal/trace check = PASS
+    numeric Hessian labels:
+      theta_NY=0.5: [+337.4, +7792, +2.66e+04] -> local minimum   [OK]
+      theta_NY=1.0: [+1.489e-12, +337.4, +3.439e+04] -> marginal   [OK]
+      theta_NY=1.2: [-3232, +337.4, +3.763e+04] -> saddle   [OK]
+  Sol3:
+    V_slice                    = (48*pi**4*L*R**2 - 256*pi**4*L*alpha*kappa**2)/(3*R*kappa**2)
+    R0                         = 4*sqrt(3)*kappa*sqrt(-alpha)/3
+    V0                         = 128*sqrt(3)*pi**4*L*sqrt(-alpha)/(3*kappa)
+    H_RR                       = 8*sqrt(3)*pi**4*L/(kappa**3*sqrt(-alpha))
+    H_Reta, H_RV               = 0, 0   [PASS]
+    tr H_(eta,V)               = 128*sqrt(3)*pi**4*L*sqrt(-alpha)*(-16*alpha*kappa**2 + 27)/(27*kappa)   [PASS]
+    det H_(eta,V)              = -262144*pi**8*L**2*alpha**2*(kappa**2*theta_NY - 1)*(kappa**2*theta_NY + 1)/9
+    slice/R0/V0/H_RR/det check = PASS
+    block-diagonal/trace check = PASS
+    numeric Hessian labels:
+      theta_NY=0.5: [+1350, +7792, +2.66e+04] -> local minimum   [OK]
+      theta_NY=1.0: [+1.489e-12, +1350, +3.439e+04] -> marginal   [OK]
+      theta_NY=1.2: [-3232, +1350, +3.763e+04] -> saddle   [OK]
+
+[3] Absent cases
+------------------------------------------------------------------------
+  T3: flat zero slice potential, no isolated EC radial branch   [OK]
+  S3: nonzero constant slope on the round slice, no stationary point   [OK]
+
+========================================================================
+RESULT: PASS  (EC slice branch present for Nil3 and Sol3; absent for T3 and S3)
+========================================================================

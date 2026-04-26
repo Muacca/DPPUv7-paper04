@@ -1,0 +1,44 @@
+================================================================
+Verification: Nil3 APS spectral core eta_APS = +1/2
+Target: Appendix E.10
+================================================================
+
+  r0 = 3.0
+  PPA spin structure: p_2 in Z + 1/2
+  Dirac APS sign convention used here: eta_APS = - int_Y CS_sigma
+
+[1] Heisenberg Landau-level sanity check
+----------------------------------------------------------------
+    p_2       mu_0^up     mu_0^down       mu_1^up
+    0.5      1.096623      1.827705      1.827705
+    1.5      9.869604     16.449341     16.449341
+    2.5     27.415568     45.692613     45.692613
+   -0.5      1.096623      1.827705      1.827705
+  n=0 unpaired spin-up branch present for sampled PPA modes: OK
+
+[2] Nil3 Levi-Civita Chern-Simons integral in the adjoint convention
+----------------------------------------------------------------
+  int_Y Tr(omega dw)        = -0.25000000   [OK]
+  int_Y (2/3)Tr(omega^3)    = +0.50000000   [OK]
+  int_Y CS_adj (H++-1 norm) = +0.25000000   [OK]
+
+[3] Spinor trace ratio and spinor CS integral
+----------------------------------------------------------------
+  quadratic trace ratio Tr_sigma/Tr_adj = +1.00000000   [OK]
+  cubic trace ratio                     = -2.00000000   [OK]
+  int_Y CS_sigma                        = -0.50000000   [OK]
+
+[4] Kernel dimension for PPA
+----------------------------------------------------------------
+  PPA excludes p_2 = 0, so the would-be zero mode is absent
+  h = 0
+
+[5] APS assembly without hardcoded rho
+----------------------------------------------------------------
+  eta_APS = -int_Y CS_sigma = +0.50000000   [OK]
+  eta(0)  = 2 eta_APS - h   = +1.00000000   [OK]
+  N_grav  = eta_APS / int_Y CS_adj = +2.00000000   [OK]
+
+================================================================
+RESULT: PASS  (eta_APS^{(3D)}(Nil^3, PPA) = +1/2, derived)
+================================================================
