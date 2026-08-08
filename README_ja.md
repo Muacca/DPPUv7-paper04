@@ -1,5 +1,7 @@
 # 4 つの Thurston 幾何に対する Euclidean geometric response dictionary と selection rules
 
+[10.5281/zenodo.19775695](https://doi.org/10.5281/zenodo.19775695)
+
 [English README](README.md)
 
 ## 論文内容

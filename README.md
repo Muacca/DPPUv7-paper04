@@ -1,5 +1,7 @@
 # Euclidean Geometric Response Dictionary and Selection Rules for Four Thurston Geometries
 
+[10.5281/zenodo.19775695](https://doi.org/10.5281/zenodo.19775695)
+
 [日本語 README](README_ja.md)
 
 ## Paper Contents
